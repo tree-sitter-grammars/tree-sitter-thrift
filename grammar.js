@@ -78,6 +78,7 @@ module.exports = grammar({
         $.identifier,
         "=",
         $.const_value,
+        optional($.annotation),
         optional($.list_separator)
       ),
 
