@@ -173,7 +173,7 @@ module.exports = grammar({
 
     definition_type: ($) => choice($.base_type, $.container_type),
 
-    base_type: ($) =>
+    base_type: () =>
       choice(
         "bool",
         "byte",
@@ -216,9 +216,9 @@ module.exports = grammar({
         $.const_map
       ),
 
-    int_constant: ($) => /[+-]?\d+/,
+    int_constant: () => /[+-]?(0x)?[0-9a-fA-F]+/,
 
-    double_constant: ($) => /[+-]?(\d+(\.\d+)?|\.\d+)([Ee][+-]?\d+)?/,
+    double_constant: () => /[+-]?(\d+(\.\d+)?|\.\d+)([Ee][+-]?\d+)?/,
 
     const_list: ($) =>
       seq("[", repeat(seq($.const_value, optional($.list_separator))), "]"),
@@ -232,16 +232,15 @@ module.exports = grammar({
         "}"
       ),
 
-    literal: ($) => /"[^"]*"|'[^']*'/,
+    literal: () => /"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/,
 
-    identifier: ($) => /[A-Za-z_][A-Za-z0-9._]*/,
+    identifier: () => /[A-Za-z_][A-Za-z0-9._]*/,
 
-    st_identifier: ($) => /[A-Za-z_][A-Za-z0-9._-]*/,
+    st_identifier: () => /[A-Za-z_][A-Za-z0-9._-]*/,
 
-    list_separator: ($) => choice(",", ";"),
-
+    list_separator: () => choice(",", ";"),
     // http://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
-    comment: ($) =>
+    comment: () =>
       token(
         choice(
           seq("#", /(\\(.|\r?\n)|[^\\\n])*/),
