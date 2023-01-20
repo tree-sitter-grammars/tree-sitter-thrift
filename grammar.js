@@ -210,7 +210,7 @@ module.exports = grammar({
         repeat(
           seq(
             $.identifier,
-            optional(seq('=', $.int_constant)),
+            optional(seq('=', $.number)),
             optional($.annotation),
             optional($.list_separator),
           ),
@@ -276,6 +276,8 @@ module.exports = grammar({
         optional($.list_separator),
       ),
 
+    parameter: ($) => $.field,
+
     recursive_field: ($) =>
       seq(
         optional($.field_id),
@@ -285,7 +287,7 @@ module.exports = grammar({
         $.identifier,
       ),
 
-    field_id: ($) => seq($.int_constant, ':'),
+    field_id: ($) => seq($.number, ':'),
 
     field_modifier: () => choice('required', 'optional'),
 
@@ -297,7 +299,7 @@ module.exports = grammar({
         $.function_type,
         $.identifier,
         '(',
-        repeat($.field),
+        repeat($.parameter),
         ')',
         optional($.throws),
         optional($.annotation),
@@ -354,17 +356,48 @@ module.exports = grammar({
 
     const_value: ($) =>
       choice(
-        $.int_constant,
-        $.double_constant,
+        $.number,
+        $.double,
+        $.boolean,
         $.string_literal,
         $.identifier,
         $.const_list,
         $.const_map,
       ),
 
-    int_constant: () => /[+-]?(0x)?[0-9a-fA-F]+/,
+    numeric_operator: () => choice('+', '-'),
 
-    double_constant: () => /[+-]?(\d+(\.\d+)?|\.\d+)([Ee][+-]?\d+)?/,
+    number: () => {
+      const hex_literal = seq(
+        optional(choice('-', '+')),
+        '0x', // Hex (lower case x only in thrift)
+        /[\da-fA-F](_?[\da-fA-F])*/,
+      );
+
+      const decimal_digits = /\d(_?\d)*/;
+      const signed_integer = seq(optional(choice('-', '+')), decimal_digits);
+      const exponent_part = seq('e', signed_integer);
+
+      const decimal_integer_literal = choice(
+        '0',
+        seq(optional('0'), /[1-9]/, optional(seq(optional('_'), decimal_digits))),
+      );
+
+      const decimal_literal = choice(
+        seq(optional(choice('-', '+')), decimal_integer_literal, exponent_part),
+        decimal_digits,
+        signed_integer,
+      );
+
+      return token(choice(
+        hex_literal,
+        decimal_literal,
+      ));
+    },
+
+    double: () => /[+-]?(\d+(\.\d+)?|\.\d+)([Ee][+-]?\d+)?/,
+
+    boolean: () => choice('true', 'false'),
 
     const_list: ($) =>
       seq('[', repeat(seq($.const_value, optional($.list_separator))), ']'),
