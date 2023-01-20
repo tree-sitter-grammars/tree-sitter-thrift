@@ -173,6 +173,20 @@ module.exports = grammar({
         'ts',
         'xml',
         'xsd',
+
+        // The following are deprecated and should not really be used, but are added for legacy code
+        'cocoa_prefix',
+        'cpp_namespace',
+        'csharp_namespace',
+        'delphi_namespace',
+        'java_package',
+        'perl_package',
+        'php_namespace',
+        'py_module',
+        'ruby_namespace',
+        'smalltalk_category',
+        'smalltalk_prefix',
+        'xsd_namespace',
       ),
 
     namespace_uri: ($) => seq('(', 'uri', '=', field('uri', $.string_literal), ')'),
@@ -295,7 +309,7 @@ module.exports = grammar({
 
     function: ($) =>
       seq(
-        optional('oneway'),
+        optional(choice('oneway', 'async')), // async is deprecated
         $.function_type,
         $.identifier,
         '(',
