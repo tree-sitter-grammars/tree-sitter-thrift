@@ -134,10 +134,14 @@ module.exports = grammar({
     namespace_scope: () =>
       choice(
         '*',
+        'as3',
         'c_glib',
         'cl',
+        'cocoa',
         'cpp',
+        'cpp2',
         'cpp.noexist',
+        'csharp',
         'd',
         'dart',
         'delphi',
@@ -149,6 +153,7 @@ module.exports = grammar({
         'js',
         'kotlin',
         'lua',
+        'netcore',
         'netstd',
         'nodejs',
         'nodets',
@@ -156,14 +161,17 @@ module.exports = grammar({
         'ocaml',
         'perl',
         'php',
+        'php.path',
         'py',
         'py.twisted',
         'rb',
         'rs',
+        'smalltalk.prefix',
         'smalltalk.category',
         'st',
         'swift',
         'ts',
+        'xml',
         'xsd',
       ),
 
@@ -257,7 +265,7 @@ module.exports = grammar({
     field: ($) =>
       seq(
         optional($.field_id),
-        optional($.field_req),
+        optional($.field_modifier),
         $.field_type,
         $.identifier,
         optional(seq('=', $.const_value)),
@@ -271,7 +279,7 @@ module.exports = grammar({
     recursive_field: ($) =>
       seq(
         optional($.field_id),
-        optional($.field_req),
+        optional($.field_modifier),
         $.field_type,
         '&',
         $.identifier,
@@ -279,7 +287,7 @@ module.exports = grammar({
 
     field_id: ($) => seq($.int_constant, ':'),
 
-    field_req: () => choice('required', 'optional'),
+    field_modifier: () => choice('required', 'optional'),
 
     xsd_attrs: ($) => seq('xsd_attrs', '{', repeat($.field), '}'),
 
