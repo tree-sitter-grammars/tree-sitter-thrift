@@ -8,7 +8,7 @@
         "required": false,
         "types": [
           {
-            "type": "literal",
+            "type": "string_literal",
             "named": true
           }
         ]
@@ -26,7 +26,7 @@
     }
   },
   {
-    "type": "base_type",
+    "type": "boolean",
     "named": true,
     "fields": {}
   },
@@ -108,6 +108,10 @@
       "required": true,
       "types": [
         {
+          "type": "boolean",
+          "named": true
+        },
+        {
           "type": "const_list",
           "named": true
         },
@@ -116,7 +120,7 @@
           "named": true
         },
         {
-          "type": "double_constant",
+          "type": "double",
           "named": true
         },
         {
@@ -124,11 +128,11 @@
           "named": true
         },
         {
-          "type": "int_constant",
+          "type": "number",
           "named": true
         },
         {
-          "type": "literal",
+          "type": "string_literal",
           "named": true
         }
       ]
@@ -166,7 +170,7 @@
       "required": true,
       "types": [
         {
-          "type": "literal",
+          "type": "include_path",
           "named": true
         }
       ]
@@ -181,7 +185,7 @@
       "required": false,
       "types": [
         {
-          "type": "literal",
+          "type": "string_literal",
           "named": true
         }
       ]
@@ -254,15 +258,15 @@
       "required": true,
       "types": [
         {
-          "type": "base_type",
-          "named": true
-        },
-        {
           "type": "container_type",
           "named": true
         },
         {
           "type": "custom_type",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
           "named": true
         }
       ]
@@ -304,11 +308,11 @@
           "named": true
         },
         {
-          "type": "int_constant",
+          "type": "list_separator",
           "named": true
         },
         {
-          "type": "list_separator",
+          "type": "number",
           "named": true
         }
       ]
@@ -358,7 +362,7 @@
           "named": true
         },
         {
-          "type": "field_req",
+          "type": "field_modifier",
           "named": true
         },
         {
@@ -389,14 +393,14 @@
       "required": true,
       "types": [
         {
-          "type": "int_constant",
+          "type": "number",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "field_req",
+    "type": "field_modifier",
     "named": true,
     "fields": {}
   },
@@ -409,15 +413,15 @@
       "required": true,
       "types": [
         {
-          "type": "base_type",
-          "named": true
-        },
-        {
           "type": "container_type",
           "named": true
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
           "named": true
         }
       ]
@@ -436,10 +440,6 @@
           "named": true
         },
         {
-          "type": "field",
-          "named": true
-        },
-        {
           "type": "function_type",
           "named": true
         },
@@ -449,6 +449,10 @@
         },
         {
           "type": "list_separator",
+          "named": true
+        },
+        {
+          "type": "parameter",
           "named": true
         },
         {
@@ -505,11 +509,31 @@
       "required": true,
       "types": [
         {
-          "type": "literal",
+          "type": "include_path",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "include_path",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "invalid",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "language_annotation",
@@ -615,12 +639,32 @@
         "required": true,
         "types": [
           {
-            "type": "literal",
+            "type": "string_literal",
             "named": true
           }
         ]
       }
     }
+  },
+  {
+    "type": "parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "field",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "primitive_type",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "recursive_field",
@@ -635,7 +679,7 @@
           "named": true
         },
         {
-          "type": "field_req",
+          "type": "field_modifier",
           "named": true
         },
         {
@@ -666,7 +710,7 @@
           "named": true
         },
         {
-          "type": "literal",
+          "type": "string_literal",
           "named": true
         }
       ]
@@ -838,7 +882,15 @@
     "named": false
   },
   {
+    "type": "+",
+    "named": false
+  },
+  {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
     "named": false
   },
   {
@@ -862,11 +914,83 @@
     "named": false
   },
   {
+    "type": "BEGIN",
+    "named": false
+  },
+  {
+    "type": "END",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
   {
     "type": "]",
+    "named": false
+  },
+  {
+    "type": "__CLASS__",
+    "named": false
+  },
+  {
+    "type": "__DIR__",
+    "named": false
+  },
+  {
+    "type": "__FILE__",
+    "named": false
+  },
+  {
+    "type": "__FUNCTION__",
+    "named": false
+  },
+  {
+    "type": "__LINE__",
+    "named": false
+  },
+  {
+    "type": "__METHOD__",
+    "named": false
+  },
+  {
+    "type": "__NAMESPACE__",
+    "named": false
+  },
+  {
+    "type": "abstract",
+    "named": false
+  },
+  {
+    "type": "alias",
+    "named": false
+  },
+  {
+    "type": "and",
+    "named": false
+  },
+  {
+    "type": "args",
+    "named": false
+  },
+  {
+    "type": "as",
+    "named": false
+  },
+  {
+    "type": "as3",
+    "named": false
+  },
+  {
+    "type": "assert",
+    "named": false
+  },
+  {
+    "type": "async",
+    "named": false
+  },
+  {
+    "type": "begin",
     "named": false
   },
   {
@@ -878,6 +1002,10 @@
     "named": false
   },
   {
+    "type": "break",
+    "named": false
+  },
+  {
     "type": "byte",
     "named": false
   },
@@ -886,7 +1014,31 @@
     "named": false
   },
   {
+    "type": "case",
+    "named": false
+  },
+  {
+    "type": "catch",
+    "named": false
+  },
+  {
     "type": "cl",
+    "named": false
+  },
+  {
+    "type": "class",
+    "named": false
+  },
+  {
+    "type": "clone",
+    "named": false
+  },
+  {
+    "type": "cocoa",
+    "named": false
+  },
+  {
+    "type": "cocoa_prefix",
     "named": false
   },
   {
@@ -898,6 +1050,10 @@
     "named": false
   },
   {
+    "type": "continue",
+    "named": false
+  },
+  {
     "type": "cpp",
     "named": false
   },
@@ -906,11 +1062,27 @@
     "named": false
   },
   {
+    "type": "cpp2",
+    "named": false
+  },
+  {
     "type": "cpp_include",
     "named": false
   },
   {
+    "type": "cpp_namespace",
+    "named": false
+  },
+  {
     "type": "cpp_type",
+    "named": false
+  },
+  {
+    "type": "csharp",
+    "named": false
+  },
+  {
+    "type": "csharp_namespace",
     "named": false
   },
   {
@@ -922,16 +1094,96 @@
     "named": false
   },
   {
+    "type": "declare",
+    "named": false
+  },
+  {
+    "type": "def",
+    "named": false
+  },
+  {
+    "type": "default",
+    "named": false
+  },
+  {
+    "type": "del",
+    "named": false
+  },
+  {
+    "type": "delete",
+    "named": false
+  },
+  {
     "type": "delphi",
     "named": false
+  },
+  {
+    "type": "delphi_namespace",
+    "named": false
+  },
+  {
+    "type": "do",
+    "named": false
+  },
+  {
+    "type": "double",
+    "named": true
   },
   {
     "type": "double",
     "named": false
   },
   {
-    "type": "double_constant",
-    "named": true
+    "type": "dynamic",
+    "named": false
+  },
+  {
+    "type": "elif",
+    "named": false
+  },
+  {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "elseif",
+    "named": false
+  },
+  {
+    "type": "elsif",
+    "named": false
+  },
+  {
+    "type": "end",
+    "named": false
+  },
+  {
+    "type": "enddeclare",
+    "named": false
+  },
+  {
+    "type": "endfor",
+    "named": false
+  },
+  {
+    "type": "endforeach",
+    "named": false
+  },
+  {
+    "type": "endif",
+    "named": false
+  },
+  {
+    "type": "endswitch",
+    "named": false
+  },
+  {
+    "type": "endwhile",
+    "named": false
+  },
+  {
+    "type": "ensure",
+    "named": false
   },
   {
     "type": "enum",
@@ -942,7 +1194,15 @@
     "named": false
   },
   {
+    "type": "except",
+    "named": false
+  },
+  {
     "type": "exception",
+    "named": false
+  },
+  {
+    "type": "exec",
     "named": false
   },
   {
@@ -950,7 +1210,43 @@
     "named": false
   },
   {
+    "type": "false",
+    "named": false
+  },
+  {
+    "type": "finally",
+    "named": false
+  },
+  {
+    "type": "float",
+    "named": false
+  },
+  {
+    "type": "for",
+    "named": false
+  },
+  {
+    "type": "foreach",
+    "named": false
+  },
+  {
+    "type": "from",
+    "named": false
+  },
+  {
+    "type": "function",
+    "named": false
+  },
+  {
+    "type": "global",
+    "named": false
+  },
+  {
     "type": "go",
+    "named": false
+  },
+  {
+    "type": "goto",
     "named": false
   },
   {
@@ -978,15 +1274,47 @@
     "named": true
   },
   {
+    "type": "if",
+    "named": false
+  },
+  {
+    "type": "implements",
+    "named": false
+  },
+  {
+    "type": "import",
+    "named": false
+  },
+  {
+    "type": "in",
+    "named": false
+  },
+  {
     "type": "include",
     "named": false
   },
   {
-    "type": "int_constant",
-    "named": true
+    "type": "inline",
+    "named": false
+  },
+  {
+    "type": "instanceof",
+    "named": false
+  },
+  {
+    "type": "interface",
+    "named": false
+  },
+  {
+    "type": "is",
+    "named": false
   },
   {
     "type": "java",
+    "named": false
+  },
+  {
+    "type": "java_package",
     "named": false
   },
   {
@@ -1002,12 +1330,12 @@
     "named": false
   },
   {
-    "type": "list",
+    "type": "lambda",
     "named": false
   },
   {
-    "type": "literal",
-    "named": true
+    "type": "list",
+    "named": false
   },
   {
     "type": "lua",
@@ -1018,11 +1346,35 @@
     "named": false
   },
   {
+    "type": "module",
+    "named": false
+  },
+  {
     "type": "namespace",
     "named": false
   },
   {
+    "type": "native",
+    "named": false
+  },
+  {
+    "type": "netcore",
+    "named": false
+  },
+  {
     "type": "netstd",
+    "named": false
+  },
+  {
+    "type": "new",
+    "named": false
+  },
+  {
+    "type": "next",
+    "named": false
+  },
+  {
+    "type": "nil",
     "named": false
   },
   {
@@ -1038,6 +1390,14 @@
     "named": false
   },
   {
+    "type": "not",
+    "named": false
+  },
+  {
+    "type": "number",
+    "named": true
+  },
+  {
     "type": "ocaml",
     "named": false
   },
@@ -1050,11 +1410,51 @@
     "named": false
   },
   {
+    "type": "or",
+    "named": false
+  },
+  {
+    "type": "package",
+    "named": false
+  },
+  {
+    "type": "pass",
+    "named": false
+  },
+  {
     "type": "perl",
     "named": false
   },
   {
+    "type": "perl_package",
+    "named": false
+  },
+  {
     "type": "php",
+    "named": false
+  },
+  {
+    "type": "php.path",
+    "named": false
+  },
+  {
+    "type": "php_namespace",
+    "named": false
+  },
+  {
+    "type": "print",
+    "named": false
+  },
+  {
+    "type": "private",
+    "named": false
+  },
+  {
+    "type": "protected",
+    "named": false
+  },
+  {
+    "type": "public",
     "named": false
   },
   {
@@ -1066,7 +1466,15 @@
     "named": false
   },
   {
+    "type": "py_module",
+    "named": false
+  },
+  {
     "type": "python",
+    "named": false
+  },
+  {
+    "type": "raise",
     "named": false
   },
   {
@@ -1074,11 +1482,39 @@
     "named": false
   },
   {
+    "type": "redo",
+    "named": false
+  },
+  {
+    "type": "register",
+    "named": false
+  },
+  {
     "type": "required",
     "named": false
   },
   {
+    "type": "rescue",
+    "named": false
+  },
+  {
+    "type": "retry",
+    "named": false
+  },
+  {
+    "type": "return",
+    "named": false
+  },
+  {
     "type": "rs",
+    "named": false
+  },
+  {
+    "type": "ruby_namespace",
+    "named": false
+  },
+  {
+    "type": "self",
     "named": false
   },
   {
@@ -1094,6 +1530,10 @@
     "named": false
   },
   {
+    "type": "sizeof",
+    "named": false
+  },
+  {
     "type": "slist",
     "named": false
   },
@@ -1102,7 +1542,23 @@
     "named": false
   },
   {
+    "type": "smalltalk.prefix",
+    "named": false
+  },
+  {
+    "type": "smalltalk_category",
+    "named": false
+  },
+  {
+    "type": "smalltalk_prefix",
+    "named": false
+  },
+  {
     "type": "st",
+    "named": false
+  },
+  {
+    "type": "static",
     "named": false
   },
   {
@@ -1110,7 +1566,15 @@
     "named": false
   },
   {
+    "type": "string_literal",
+    "named": true
+  },
+  {
     "type": "struct",
+    "named": false
+  },
+  {
+    "type": "super",
     "named": false
   },
   {
@@ -1118,7 +1582,39 @@
     "named": false
   },
   {
+    "type": "switch",
+    "named": false
+  },
+  {
+    "type": "synchronized",
+    "named": false
+  },
+  {
+    "type": "then",
+    "named": false
+  },
+  {
+    "type": "this",
+    "named": false
+  },
+  {
+    "type": "throw",
+    "named": false
+  },
+  {
     "type": "throws",
+    "named": false
+  },
+  {
+    "type": "transient",
+    "named": false
+  },
+  {
+    "type": "true",
+    "named": false
+  },
+  {
+    "type": "try",
     "named": false
   },
   {
@@ -1130,7 +1626,23 @@
     "named": false
   },
   {
+    "type": "undef",
+    "named": false
+  },
+  {
     "type": "union",
+    "named": false
+  },
+  {
+    "type": "unless",
+    "named": false
+  },
+  {
+    "type": "unsigned",
+    "named": false
+  },
+  {
+    "type": "until",
     "named": false
   },
   {
@@ -1138,7 +1650,43 @@
     "named": false
   },
   {
+    "type": "use",
+    "named": false
+  },
+  {
+    "type": "var",
+    "named": false
+  },
+  {
+    "type": "virtual",
+    "named": false
+  },
+  {
     "type": "void",
+    "named": false
+  },
+  {
+    "type": "volatile",
+    "named": false
+  },
+  {
+    "type": "when",
+    "named": false
+  },
+  {
+    "type": "while",
+    "named": false
+  },
+  {
+    "type": "with",
+    "named": false
+  },
+  {
+    "type": "xml",
+    "named": false
+  },
+  {
+    "type": "xor",
     "named": false
   },
   {
@@ -1154,11 +1702,19 @@
     "named": false
   },
   {
+    "type": "xsd_namespace",
+    "named": false
+  },
+  {
     "type": "xsd_nillable",
     "named": false
   },
   {
     "type": "xsd_optional",
+    "named": false
+  },
+  {
+    "type": "yield",
     "named": false
   },
   {
