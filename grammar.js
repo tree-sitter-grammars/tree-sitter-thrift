@@ -14,13 +14,15 @@ module.exports = grammar({
 
     cpp_include: ($) => seq("cpp_include", $.literal),
 
-    namespace: ($) => seq("namespace", $.namespace_scope, $.identifier),
+    namespace: ($) => seq("namespace", $.namespace_scope, $.identifier, optional($.namespace_uri)),
 
-    namespace_scope: ($) =>
+    namespace_scope: () =>
       choice(
         "*",
         "c_glib",
+		"cl",
         "cpp",
+		"cpp.noexist",
         "d",
         "dart",
         "delphi",
@@ -35,6 +37,7 @@ module.exports = grammar({
         "netstd",
         "nodejs",
         "nodets",
+		"noexist",
         "ocaml",
         "perl",
         "php",
@@ -42,11 +45,14 @@ module.exports = grammar({
         "py.twisted",
         "rb",
         "rs",
+		"smalltalk.category",
         "st",
         "swift",
         "ts",
         "xsd"
       ),
+
+	namespace_uri: ($) => seq("(", "uri", "=", field("uri", $.literal), ")"),
 
     definition: ($) =>
       choice(
