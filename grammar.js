@@ -125,9 +125,9 @@ module.exports = grammar({
 
     header: ($) => choice($.include, $.cpp_include, $.namespace),
 
-    include: ($) => seq('include', $.literal),
+    include: ($) => seq('include', $.include_path),
 
-    cpp_include: ($) => seq('cpp_include', $.literal),
+    cpp_include: ($) => seq('cpp_include', $.include_path),
 
     namespace: ($) => seq('namespace', $.namespace_scope, $.identifier, optional($.namespace_uri)),
 
@@ -167,7 +167,7 @@ module.exports = grammar({
         'xsd',
       ),
 
-    namespace_uri: ($) => seq('(', 'uri', '=', field('uri', $.literal), ')'),
+    namespace_uri: ($) => seq('(', 'uri', '=', field('uri', $.string_literal), ')'),
 
     definition: ($) =>
       choice(
@@ -216,7 +216,7 @@ module.exports = grammar({
         'senum',
         $.identifier,
         '{',
-        repeat(seq($.literal, optional($.list_separator))),
+        repeat(seq($.string_literal, optional($.list_separator))),
         '}',
       ),
 
@@ -324,12 +324,12 @@ module.exports = grammar({
 
     list_type: ($) => seq('list', '<', $.field_type, optional($.annotation), '>', optional($.cpp_type)),
 
-    cpp_type: ($) => choice('cpp_type', $.literal),
+    cpp_type: ($) => choice('cpp_type', $.string_literal),
 
     annotation: ($) =>
       seq(
         '(',
-        list_seq(seq($.language_annotation, optional(seq('=', field('value', $.literal)))), ',', true),
+        list_seq(seq($.language_annotation, optional(seq('=', field('value', $.string_literal)))), ',', true),
         ')',
       ),
 
@@ -348,7 +348,7 @@ module.exports = grammar({
       choice(
         $.int_constant,
         $.double_constant,
-        $.literal,
+        $.string_literal,
         $.identifier,
         $.const_list,
         $.const_map,
@@ -370,7 +370,9 @@ module.exports = grammar({
         '}',
       ),
 
-    literal: () => /"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/,
+    string_literal: () => /"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/,
+
+    include_path: ($) => $.string_literal,
 
     identifier: () => /[A-Za-z_][A-Za-z0-9._]*/,
 
