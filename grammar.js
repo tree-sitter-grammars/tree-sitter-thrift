@@ -1,10 +1,12 @@
+/* eslint-disable camelcase */
+
 const list_seq = (rule, separator, trailing_separator = false) =>
   trailing_separator ?
     seq(rule, repeat(seq(separator, rule)), optional(separator)) :
     seq(rule, repeat(seq(separator, rule)));
 
 module.exports = grammar({
-  name: "thrift",
+  name: 'thrift',
 
   extras: ($) => [/\s|\\\r?\n/, $.comment],
 
@@ -15,49 +17,49 @@ module.exports = grammar({
 
     header: ($) => choice($.include, $.cpp_include, $.namespace),
 
-    include: ($) => seq("include", $.literal),
+    include: ($) => seq('include', $.literal),
 
-    cpp_include: ($) => seq("cpp_include", $.literal),
+    cpp_include: ($) => seq('cpp_include', $.literal),
 
-    namespace: ($) => seq("namespace", $.namespace_scope, $.identifier, optional($.namespace_uri)),
+    namespace: ($) => seq('namespace', $.namespace_scope, $.identifier, optional($.namespace_uri)),
 
     namespace_scope: () =>
       choice(
-        "*",
-        "c_glib",
-		"cl",
-        "cpp",
-		"cpp.noexist",
-        "d",
-        "dart",
-        "delphi",
-        "erl",
-        "go",
-        "haxe",
-        "java",
-        "javame",
-        "js",
-        "kotlin",
-        "lua",
-        "netstd",
-        "nodejs",
-        "nodets",
-		"noexist",
-        "ocaml",
-        "perl",
-        "php",
-        "py",
-        "py.twisted",
-        "rb",
-        "rs",
-		"smalltalk.category",
-        "st",
-        "swift",
-        "ts",
-        "xsd"
+        '*',
+        'c_glib',
+        'cl',
+        'cpp',
+        'cpp.noexist',
+        'd',
+        'dart',
+        'delphi',
+        'erl',
+        'go',
+        'haxe',
+        'java',
+        'javame',
+        'js',
+        'kotlin',
+        'lua',
+        'netstd',
+        'nodejs',
+        'nodets',
+        'noexist',
+        'ocaml',
+        'perl',
+        'php',
+        'py',
+        'py.twisted',
+        'rb',
+        'rs',
+        'smalltalk.category',
+        'st',
+        'swift',
+        'ts',
+        'xsd',
       ),
 
-	namespace_uri: ($) => seq("(", "uri", "=", field("uri", $.literal), ")"),
+    namespace_uri: ($) => seq('(', 'uri', '=', field('uri', $.literal), ')'),
 
     definition: ($) =>
       choice(
@@ -68,79 +70,79 @@ module.exports = grammar({
         $.struct,
         $.union,
         $.exception,
-        $.service
+        $.service,
       ),
 
     const: ($) =>
       seq(
-        "const",
+        'const',
         $.field_type,
         $.identifier,
-        "=",
+        '=',
         $.const_value,
         optional($.annotation),
-        optional($.list_separator)
+        optional($.list_separator),
       ),
 
-    typedef: ($) => seq("typedef", $.definition_type, optional($.annotation), $.identifier, optional($.annotation), optional($.list_separator)),
+    typedef: ($) => seq('typedef', $.definition_type, optional($.annotation), $.identifier, optional($.annotation), optional($.list_separator)),
 
     enum: ($) =>
       seq(
-        "enum",
+        'enum',
         $.identifier,
-        "{",
+        '{',
         repeat(
           seq(
             $.identifier,
-            optional(seq("=", $.int_constant)),
+            optional(seq('=', $.int_constant)),
             optional($.annotation),
             optional($.list_separator),
-          )
+          ),
         ),
-        "}",
-		optional($.annotation)
+        '}',
+        optional($.annotation),
       ),
 
     senum: ($) =>
       seq(
-        "senum",
+        'senum',
         $.identifier,
-        "{",
+        '{',
         repeat(seq($.literal, optional($.list_separator))),
-        "}"
+        '}',
       ),
 
     struct: ($) =>
       seq(
-        "struct",
+        'struct',
         $.identifier,
-        optional("xsd_all"),
-        "{",
+        optional('xsd_all'),
+        '{',
         repeat(choice($.field, $.recursive_field)),
-        "}",
+        '}',
         optional($.annotation),
       ),
 
     union: ($) =>
       seq(
-        "union",
+        'union',
         $.identifier,
-        optional("xsd_all"),
-        "{",
+        optional('xsd_all'),
+        '{',
         repeat($.field),
-        "}"
+        '}',
       ),
 
-    exception: ($) => seq("exception", $.identifier, "{", repeat($.field), "}", optional($.annotation)),
+    exception: ($) => seq('exception', $.identifier, '{', repeat($.field), '}', optional($.annotation)),
 
     service: ($) =>
       seq(
-        "service",
+        'service',
         $.identifier,
-        optional(seq("extends", $.identifier)),
-        "{",
+        optional(seq('extends', $.identifier)),
+        '{',
         repeat($.function),
-        "}",
+        '}',
         optional($.annotation),
       ),
 
@@ -150,45 +152,45 @@ module.exports = grammar({
         optional($.field_req),
         $.field_type,
         $.identifier,
-        optional(seq("=", $.const_value)),
-        optional("xsd_optional"),
-        optional("xsd_nillable"),
+        optional(seq('=', $.const_value)),
+        optional('xsd_optional'),
+        optional('xsd_nillable'),
         optional($.xsd_attrs),
         optional($.annotation),
         optional($.list_separator),
-	  ),
+      ),
 
-	recursive_field: ($) => 
-	  seq(
-		optional($.field_id),
-		optional($.field_req),
-		$.field_type,
-		"&",
-		$.identifier,
-	  ),
+    recursive_field: ($) =>
+      seq(
+        optional($.field_id),
+        optional($.field_req),
+        $.field_type,
+        '&',
+        $.identifier,
+      ),
 
-    field_id: ($) => seq($.int_constant, ":"),
+    field_id: ($) => seq($.int_constant, ':'),
 
-    field_req: () => choice("required", "optional"),
+    field_req: () => choice('required', 'optional'),
 
-    xsd_attrs: ($) => seq("xsd_attrs", "{", repeat($.field), "}"),
+    xsd_attrs: ($) => seq('xsd_attrs', '{', repeat($.field), '}'),
 
     function: ($) =>
       seq(
-        optional("oneway"),
+        optional('oneway'),
         $.function_type,
         $.identifier,
-        "(",
+        '(',
         repeat($.field),
-        ")",
+        ')',
         optional($.throws),
         optional($.annotation),
         optional($.list_separator),
       ),
 
-    function_type: ($) => choice($.field_type, "void"),
+    function_type: ($) => choice($.field_type, 'void'),
 
-    throws: ($) => seq("throws", "(", repeat($.field), ")"),
+    throws: ($) => seq('throws', '(', repeat($.field), ')'),
 
     field_type: ($) => choice($.identifier, $.base_type, $.container_type),
 
@@ -196,55 +198,55 @@ module.exports = grammar({
 
     base_type: () =>
       choice(
-        "bool",
-        "byte",
-        "i8",
-        "i16",
-        "i32",
-        "i64",
-        "double",
-        "string",
-        "binary",
-        "slist"
+        'bool',
+        'byte',
+        'i8',
+        'i16',
+        'i32',
+        'i64',
+        'double',
+        'string',
+        'binary',
+        'slist',
       ),
 
     container_type: ($) => choice($.map_type, $.set_type, $.list_type),
 
     map_type: ($) =>
       seq(
-        "map",
+        'map',
         optional($.cpp_type),
-        "<",
+        '<',
         $.field_type,
-		optional($.annotation),
-        ",",
+        optional($.annotation),
+        ',',
         $.field_type,
-        ">"
+        '>',
       ),
 
-    set_type: ($) => seq("set", optional($.cpp_type), "<", $.field_type, optional($.annotation), ">"),
+    set_type: ($) => seq('set', optional($.cpp_type), '<', $.field_type, optional($.annotation), '>'),
 
-    list_type: ($) => seq("list", "<", $.field_type, optional($.annotation), ">", optional($.cpp_type)),
+    list_type: ($) => seq('list', '<', $.field_type, optional($.annotation), '>', optional($.cpp_type)),
 
-    cpp_type: ($) => choice("cpp_type", $.literal),
+    cpp_type: ($) => choice('cpp_type', $.literal),
 
-	annotation: ($) =>
-	  seq(
-		"(",
-		list_seq(seq($.language_annotation, optional(seq("=", field("value", $.literal)))), ",", true),
-		")",
-	  ),
+    annotation: ($) =>
+      seq(
+        '(',
+        list_seq(seq($.language_annotation, optional(seq('=', field('value', $.literal)))), ',', true),
+        ')',
+      ),
 
-	language_annotation: ($) => field("language_specific_type", $.identifier),
+    language_annotation: ($) => field('language_specific_type', $.identifier),
 
-	annotation_lang: () =>
+    annotation_lang: () =>
       choice(
-		"cpp",
-		"java",
-		"python",
-	  ),
+        'cpp',
+        'java',
+        'python',
+      ),
 
-	custom_type: ($) => $.identifier,
+    custom_type: ($) => $.identifier,
 
     const_value: ($) =>
       choice(
@@ -253,7 +255,7 @@ module.exports = grammar({
         $.literal,
         $.identifier,
         $.const_list,
-        $.const_map
+        $.const_map,
       ),
 
     int_constant: () => /[+-]?(0x)?[0-9a-fA-F]+/,
@@ -261,15 +263,15 @@ module.exports = grammar({
     double_constant: () => /[+-]?(\d+(\.\d+)?|\.\d+)([Ee][+-]?\d+)?/,
 
     const_list: ($) =>
-      seq("[", repeat(seq($.const_value, optional($.list_separator))), "]"),
+      seq('[', repeat(seq($.const_value, optional($.list_separator))), ']'),
 
     const_map: ($) =>
       seq(
-        "{",
+        '{',
         repeat(
-          seq($.const_value, ":", $.const_value, optional($.list_separator))
+          seq($.const_value, ':', $.const_value, optional($.list_separator)),
         ),
-        "}"
+        '}',
       ),
 
     literal: () => /"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/,
@@ -278,16 +280,16 @@ module.exports = grammar({
 
     st_identifier: () => /[A-Za-z_][A-Za-z0-9._-]*/,
 
-    list_separator: () => choice(",", ";"),
+    list_separator: () => choice(',', ';'),
 
     // http://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
     comment: () =>
       token(
         choice(
-          seq("#", /(\\(.|\r?\n)|[^\\\n])*/),
-          seq("//", /(\\(.|\r?\n)|[^\\\n])*/),
-          seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")
-        )
+          seq('#', /(\\(.|\r?\n)|[^\\\n])*/),
+          seq('//', /(\\(.|\r?\n)|[^\\\n])*/),
+          seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/'),
+        ),
       ),
   },
 });
