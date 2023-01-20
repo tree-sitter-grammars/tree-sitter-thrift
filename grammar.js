@@ -108,8 +108,8 @@ module.exports = grammar({
         $.identifier,
         optional("xsd_all"),
         "{",
-        repeat($.field),
-        "}"
+        repeat(choice($.field, $.recursive_field)),
+        "}",
       ),
 
     union: ($) =>
@@ -146,6 +146,15 @@ module.exports = grammar({
         optional($.xsd_attrs),
         optional($.list_separator)
       ),
+
+	recursive_field: ($) => 
+	  seq(
+		optional($.field_id),
+		optional($.field_req),
+		$.field_type,
+		"&",
+		$.identifier,
+	  ),
 
     field_id: ($) => seq($.int_constant, ":"),
 
