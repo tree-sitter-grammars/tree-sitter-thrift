@@ -320,6 +320,18 @@
           "members": [
             {
               "type": "SYMBOL",
+              "name": "annotation"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
               "name": "list_separator"
             },
             {
@@ -983,7 +995,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "list_separator"
+              "name": "annotation"
             },
             {
               "type": "BLANK"
@@ -995,7 +1007,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "annotation"
+              "name": "list_separator"
             },
             {
               "type": "BLANK"

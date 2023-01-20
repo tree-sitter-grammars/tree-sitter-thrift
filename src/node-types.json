@@ -39,6 +39,10 @@
       "required": true,
       "types": [
         {
+          "type": "annotation",
+          "named": true
+        },
+        {
           "type": "const_value",
           "named": true
         },
