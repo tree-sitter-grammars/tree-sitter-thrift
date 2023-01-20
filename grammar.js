@@ -5,6 +5,8 @@ const list_seq = (rule, separator, trailing_separator = false) =>
     seq(rule, repeat(seq(separator, rule)), optional(separator)) :
     seq(rule, repeat(seq(separator, rule)));
 
+const primitives = ['binary', 'bool', 'byte', 'i8', 'i16', 'i32', 'i64', 'double', 'string', 'slist'];
+
 module.exports = grammar({
   name: 'thrift',
 
@@ -192,23 +194,11 @@ module.exports = grammar({
 
     throws: ($) => seq('throws', '(', repeat($.field), ')'),
 
-    field_type: ($) => choice($.identifier, $.base_type, $.container_type),
+    field_type: ($) => choice($.identifier, $.primitive_type, $.container_type),
 
-    definition_type: ($) => choice($.base_type, $.container_type, $.custom_type),
+    definition_type: ($) => choice($.primitive_type, $.container_type, $.custom_type),
 
-    base_type: () =>
-      choice(
-        'bool',
-        'byte',
-        'i8',
-        'i16',
-        'i32',
-        'i64',
-        'double',
-        'string',
-        'binary',
-        'slist',
-      ),
+    primitive_type: () => choice(...primitives),
 
     container_type: ($) => choice($.map_type, $.set_type, $.list_type),
 
