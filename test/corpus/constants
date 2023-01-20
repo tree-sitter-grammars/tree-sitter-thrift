@@ -61,7 +61,7 @@ const double e11 = -1e10
             (primitive_type))
           (identifier)
           (const_value
-            (number))))
+            (double))))
       (comment)
       (definition
         (const
@@ -69,7 +69,7 @@ const double e11 = -1e10
             (primitive_type))
           (identifier)
           (const_value
-            (number)))))
+            (double)))))
 
 
 

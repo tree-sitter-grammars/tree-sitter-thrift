@@ -390,7 +390,6 @@ module.exports = grammar({
 
       const decimal_digits = /\d(_?\d)*/;
       const signed_integer = seq(optional(choice('-', '+')), decimal_digits);
-      const exponent_part = seq('e', signed_integer);
 
       const decimal_integer_literal = choice(
         '0',
@@ -398,7 +397,7 @@ module.exports = grammar({
       );
 
       const decimal_literal = choice(
-        seq(optional(choice('-', '+')), decimal_integer_literal, exponent_part),
+        seq(optional(choice('-', '+')), decimal_integer_literal),
         decimal_digits,
         signed_integer,
       );
