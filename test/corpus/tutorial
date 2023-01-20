@@ -1,6 +1,6 @@
-=========
-tutorial
-=========
+========================
+Test the thrift tutorial
+========================
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -178,7 +178,8 @@ service Calculator extends shared.SharedService {
   (comment)
   (header
     (include
-      (literal)))
+      (include_path
+        (string_literal))))
   (comment)
   (header
     (namespace
@@ -216,85 +217,85 @@ service Calculator extends shared.SharedService {
   (definition
     (typedef
       (definition_type
-        (base_type))
+        (primitive_type))
       (identifier)))
   (comment)
   (definition
     (const
       (field_type
-        (base_type))
+        (primitive_type))
       (identifier)
       (const_value
-        (int_constant))))
+        (number))))
   (definition
     (const
       (field_type
         (container_type
           (map_type
             (field_type
-              (base_type))
+              (primitive_type))
             (field_type
-              (base_type)))))
+              (primitive_type)))))
       (identifier)
       (const_value
         (const_map
           (const_value
-            (literal))
+            (string_literal))
           (const_value
-            (literal))
+            (string_literal))
           (list_separator)
           (const_value
-            (literal))
+            (string_literal))
           (const_value
-            (literal))))))
+            (string_literal))))))
   (comment)
   (definition
     (enum
       (identifier)
       (identifier)
-      (int_constant)
+      (number)
       (list_separator)
       (identifier)
-      (int_constant)
+      (number)
       (list_separator)
       (identifier)
-      (int_constant)
+      (number)
       (list_separator)
       (identifier)
-      (int_constant)))
+      (number)))
   (comment)
   (definition
     (struct
       (identifier)
       (field
         (field_id
-          (int_constant))
+          (number))
         (field_type
-          (base_type))
+          (primitive_type))
         (identifier)
         (const_value
-          (int_constant))
+          (number))
         (list_separator))
       (field
         (field_id
-          (int_constant))
+          (number))
         (field_type
-          (base_type))
+          (primitive_type))
         (identifier)
         (list_separator))
       (field
         (field_id
-          (int_constant))
+          (number))
         (field_type
           (identifier))
         (identifier)
         (list_separator))
       (field
         (field_id
-          (int_constant))
-        (field_req)
+          (number))
+        (field_modifier)
         (field_type
-          (base_type))
+          (primitive_type))
         (identifier)
         (list_separator))))
   (comment)
@@ -303,16 +304,16 @@ service Calculator extends shared.SharedService {
       (identifier)
       (field
         (field_id
-          (int_constant))
+          (number))
         (field_type
-          (base_type))
+          (primitive_type))
         (identifier)
         (list_separator))
       (field
         (field_id
-          (int_constant))
+          (number))
         (field_type
-          (base_type))
+          (primitive_type))
         (identifier))))
   (comment)
   (definition
@@ -327,44 +328,48 @@ service Calculator extends shared.SharedService {
       (function
         (function_type
           (field_type
-            (base_type)))
+            (primitive_type)))
         (identifier)
-        (field
-          (field_id
-            (int_constant))
-          (field_type
-            (base_type))
-          (identifier)
-          (list_separator))
-        (field
-          (field_id
-            (int_constant))
-          (field_type
-            (base_type))
-          (identifier))
+        (parameter
+		  (field
+			(field_id
+				(number))
+			(field_type
+				(primitive_type))
+			(identifier)
+			(list_separator)))
+        (parameter
+		  (field
+			(field_id
+				(number))
+			(field_type
+				(primitive_type))
+			(identifier)))
         (list_separator))
       (function
         (function_type
           (field_type
-            (base_type)))
+            (primitive_type)))
         (identifier)
-        (field
-          (field_id
-            (int_constant))
-          (field_type
-            (base_type))
-          (identifier)
-          (list_separator))
-        (field
-          (field_id
-            (int_constant))
-          (field_type
-            (identifier))
-          (identifier))
+        (parameter
+		  (field
+			(field_id
+				(number))
+			(field_type
+				(primitive_type))
+			(identifier)
+          (list_separator)))
+        (parameter
+		  (field
+			(field_id
+				(number))
+			(field_type
+				(identifier))
+			(identifier)))
         (throws
           (field
             (field_id
-              (int_constant))
+              (number))
             (field_type
               (identifier))
             (identifier)))

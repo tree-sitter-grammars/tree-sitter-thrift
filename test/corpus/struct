@@ -1,0 +1,117 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements. See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership. The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+
+================================
+Test a struct with crazy nesting
+================================
+
+struct CrazyNesting {
+  1: string string_field,
+  2: optional set<Insanity> set_field,
+  // Do not insert line break as test/go/Makefile.am is removing this line with pattern match
+  3: required list<map<set<i32> (python.immutable = ""), map<i32,set<list<map<Insanity,string>(python.immutable = "")> (python.immutable = "")>>>> list_field,
+  4: binary binary_field
+  5: uuid uuid_field
+}
+
+---
+
+(document
+      (definition
+        (struct
+          (identifier)
+          (field
+            (field_id
+              (number))
+            (field_type
+              (primitive_type))
+            (identifier)
+            (list_separator))
+          (field
+            (field_id
+              (number))
+            (field_modifier)
+            (field_type
+              (container_type
+                (set_type
+                  (field_type
+                    (identifier)))))
+            (identifier)
+            (list_separator))
+          (comment)
+          (field
+            (field_id
+              (number))
+            (field_modifier)
+            (field_type
+              (container_type
+                (list_type
+                  (field_type
+                    (container_type
+                      (map_type
+                        (field_type
+                          (container_type
+                            (set_type
+                              (field_type
+                                (primitive_type)))))
+                        (annotation
+                          (language_annotation
+                            (identifier))
+                          (string_literal))
+                        (field_type
+                (container_type
+                            (map_type
+                              (field_type
+                                (primitive_type))
+                              (field_type
+                                (container_type
+                                  (set_type
+                                    (field_type
+                                      (container_type
+                                        (list_type
+                                          (field_type
+                                            (container_type
+                                              (map_type
+                                                (field_type
+                                                  (identifier))
+                                                (field_type
+                                                  (primitive_type)))))
+                                          (annotation
+                                            (language_annotation
+                                              (identifier))
+                                            (string_literal)))))
+                                    (annotation
+                                      (language_annotation
+                                        (identifier))
+                                      (string_literal))))))))))))))
+            (identifier)
+            (list_separator))
+          (field
+            (field_id
+              (number))
+            (field_type
+              (primitive_type))
+            (identifier))
+          (field
+            (field_id
+              (number))
+            (field_type
+              (identifier))
+            (identifier)))))
