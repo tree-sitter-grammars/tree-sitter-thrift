@@ -1,3 +1,8 @@
+const list_seq = (rule, separator, trailing_separator = false) =>
+  trailing_separator ?
+    seq(rule, repeat(seq(separator, rule)), optional(separator)) :
+    seq(rule, repeat(seq(separator, rule)));
+
 module.exports = grammar({
   name: "thrift",
 
@@ -76,7 +81,7 @@ module.exports = grammar({
         optional($.list_separator)
       ),
 
-    typedef: ($) => seq("typedef", $.definition_type, $.identifier),
+    typedef: ($) => seq("typedef", $.definition_type, optional($.annotation), $.identifier, optional($.annotation), optional($.list_separator)),
 
     enum: ($) =>
       seq(
@@ -87,10 +92,12 @@ module.exports = grammar({
           seq(
             $.identifier,
             optional(seq("=", $.int_constant)),
-            optional($.list_separator)
+            optional($.annotation),
+            optional($.list_separator),
           )
         ),
-        "}"
+        "}",
+		optional($.annotation)
       ),
 
     senum: ($) =>
@@ -110,6 +117,7 @@ module.exports = grammar({
         "{",
         repeat(choice($.field, $.recursive_field)),
         "}",
+        optional($.annotation),
       ),
 
     union: ($) =>
@@ -122,7 +130,7 @@ module.exports = grammar({
         "}"
       ),
 
-    exception: ($) => seq("exception", $.identifier, "{", repeat($.field), "}"),
+    exception: ($) => seq("exception", $.identifier, "{", repeat($.field), "}", optional($.annotation)),
 
     service: ($) =>
       seq(
@@ -131,7 +139,8 @@ module.exports = grammar({
         optional(seq("extends", $.identifier)),
         "{",
         repeat($.function),
-        "}"
+        "}",
+        optional($.annotation),
       ),
 
     field: ($) =>
@@ -144,8 +153,9 @@ module.exports = grammar({
         optional("xsd_optional"),
         optional("xsd_nillable"),
         optional($.xsd_attrs),
-        optional($.list_separator)
-      ),
+        optional($.annotation),
+        optional($.list_separator),
+	  ),
 
 	recursive_field: ($) => 
 	  seq(
@@ -158,7 +168,7 @@ module.exports = grammar({
 
     field_id: ($) => seq($.int_constant, ":"),
 
-    field_req: ($) => choice("required", "optional"),
+    field_req: () => choice("required", "optional"),
 
     xsd_attrs: ($) => seq("xsd_attrs", "{", repeat($.field), "}"),
 
@@ -171,7 +181,8 @@ module.exports = grammar({
         repeat($.field),
         ")",
         optional($.throws),
-        optional($.list_separator)
+        optional($.annotation),
+        optional($.list_separator),
       ),
 
     function_type: ($) => choice($.field_type, "void"),
@@ -204,16 +215,33 @@ module.exports = grammar({
         optional($.cpp_type),
         "<",
         $.field_type,
+		optional($.annotation),
         ",",
         $.field_type,
         ">"
       ),
 
-    set_type: ($) => seq("set", optional($.cpp_type), "<", $.field_type, ">"),
+    set_type: ($) => seq("set", optional($.cpp_type), "<", $.field_type, optional($.annotation), ">"),
 
-    list_type: ($) => seq("list", "<", $.field_type, ">", optional($.cpp_type)),
+    list_type: ($) => seq("list", "<", $.field_type, optional($.annotation), ">", optional($.cpp_type)),
 
     cpp_type: ($) => choice("cpp_type", $.literal),
+
+	annotation: ($) =>
+	  seq(
+		"(",
+		list_seq(seq($.language_annotation, optional(seq("=", field("value", $.literal)))), ",", true),
+		")",
+	  ),
+
+	language_annotation: ($) => field("language_specific_type", $.identifier),
+
+	annotation_lang: () =>
+      choice(
+		"cpp",
+		"java",
+		"python",
+	  ),
 
 	custom_type: ($) => $.identifier,
 
