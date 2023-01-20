@@ -171,7 +171,7 @@ module.exports = grammar({
 
     field_type: ($) => choice($.identifier, $.base_type, $.container_type),
 
-    definition_type: ($) => choice($.base_type, $.container_type),
+    definition_type: ($) => choice($.base_type, $.container_type, $.custom_type),
 
     base_type: () =>
       choice(
@@ -206,6 +206,8 @@ module.exports = grammar({
 
     cpp_type: ($) => choice("cpp_type", $.literal),
 
+	custom_type: ($) => $.identifier,
+
     const_value: ($) =>
       choice(
         $.int_constant,
@@ -239,6 +241,7 @@ module.exports = grammar({
     st_identifier: () => /[A-Za-z_][A-Za-z0-9._-]*/,
 
     list_separator: () => choice(",", ";"),
+
     // http://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
     comment: () =>
       token(
