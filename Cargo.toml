@@ -2,11 +2,14 @@
 name = "tree-sitter-thrift"
 description = "thrift grammar for the tree-sitter parsing library"
 version = "0.1.0"
-authors = ["duskmoon (Campbell He) <kp.campbell.he@duskmoon314.com>"]
+authors = [
+	"duskmoon (Campbell He) <kp.campbell.he@duskmoon314.com>",
+	"amaanq (Amaan Qureshi) <amaanq12@gmail.com>",
+]
 keywords = ["incremental", "parsing", "thrift"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/duskmoon314/tree-sitter-thrift"
-edition = "2018"
+edition = "2021"
 license = "MIT"
 
 build = "bindings/rust/build.rs"
