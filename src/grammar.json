@@ -445,8 +445,13 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          "named": true,
+          "value": "typedef_definition"
         },
         {
           "type": "CHOICE",

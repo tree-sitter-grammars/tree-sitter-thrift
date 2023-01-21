@@ -821,11 +821,11 @@
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "list_separator",
           "named": true
         },
         {
-          "type": "list_separator",
+          "type": "typedef_definition",
           "named": true
         }
       ]
@@ -1624,6 +1624,10 @@
   {
     "type": "typedef",
     "named": false
+  },
+  {
+    "type": "typedef_definition",
+    "named": true
   },
   {
     "type": "undef",
