@@ -214,7 +214,7 @@ module.exports = grammar({
         optional($.list_separator),
       ),
 
-    typedef: ($) => seq('typedef', $.definition_type, optional($.annotation), $.identifier, optional($.annotation), optional($.list_separator)),
+    typedef: ($) => seq('typedef', $.definition_type, optional($.annotation), alias($.identifier, $.typedef_definition), optional($.annotation), optional($.list_separator)),
 
     enum: ($) =>
       seq(

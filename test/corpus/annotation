@@ -39,7 +39,7 @@ typedef list<i32> ( cpp.template = "std::list" ) int_linked_list
             (language_annotation
               (identifier))
             (string_literal))
-          (identifier))))
+          (typedef_definition))))
 
 
 
@@ -357,7 +357,7 @@ typedef string ( unicode.encoding = "UTF-16" ) non_latin_string (foo="bar")
             (language_annotation
               (identifier))
             (string_literal))
-          (identifier)
+          (typedef_definition)
           (annotation
             (language_annotation
               (identifier))
@@ -385,7 +385,7 @@ typedef list< double ( cpp.fixed_point = "16" ) > tiny_float_list
                   (language_annotation
                     (identifier))
                   (string_literal)))))
-          (identifier))))
+          (typedef_definition))))
 
 
 

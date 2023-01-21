@@ -75,12 +75,12 @@ const set<GreekGodGoddessType> BEAUTY = [ GreekGodGoddess.APHRODITE, GreekGodGod
           (definition_type
             (custom_type
               (identifier)))
-          (identifier)))
+          (typedef_definition)))
       (definition
         (typedef
           (definition_type
             (primitive_type))
-          (identifier)))
+          (typedef_definition)))
       (definition
         (struct
           (identifier)

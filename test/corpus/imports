@@ -44,10 +44,10 @@ typedef b.B B
           (definition_type
             (custom_type
               (identifier)))
-          (identifier)))
+          (typedef_definition)))
       (definition
         (typedef
           (definition_type
             (custom_type
               (identifier)))
-          (identifier))))
+          (typedef_definition))))
