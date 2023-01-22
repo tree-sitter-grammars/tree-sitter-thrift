@@ -251,17 +251,17 @@ service Calculator extends shared.SharedService {
       (comment)
       (definition
         (enum
-          (type_identifier)
-          (enum_identifier)
+		  (enum_identifier)
+          (enum_member)
           (number)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (number)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (number)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (number)))
       (comment)
       (definition

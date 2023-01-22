@@ -410,24 +410,24 @@ enum weekdays {
 (document
       (definition
         (enum
-          (type_identifier)
           (enum_identifier)
+          (enum_member)
           (annotation
             (annotation_definition
               (annotation_identifier))
             (annotation_value))
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (annotation
             (annotation_definition
               (annotation_identifier))
@@ -454,24 +454,24 @@ enum weekdays {
 (document
       (definition
         (enum
-          (type_identifier)
           (enum_identifier)
+          (enum_member)
           (annotation
             (annotation_definition
               (annotation_identifier))
             (annotation_value))
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (annotation
             (annotation_definition
               (annotation_identifier))

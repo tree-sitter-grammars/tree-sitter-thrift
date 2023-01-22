@@ -190,6 +190,7 @@ module.exports = grammar({
     $._annotation_identifier,
     $._const_identifier,
     $._enum_identifier,
+    $._enum_member,
     $._field_identifier,
     $._param_identifier,
     $._type_identifier,
@@ -240,11 +241,11 @@ module.exports = grammar({
     enum: ($) =>
       seq(
         'enum',
-        $._type_identifier,
+        $._enum_identifier,
         '{',
         repeat(
           seq(
-            $._enum_identifier,
+            $._enum_member,
             optional(seq('=', $.number)),
             optional($.annotation),
             optional($.list_separator),
@@ -410,7 +411,7 @@ module.exports = grammar({
         $.const_list,
         $.const_map,
       ),
-    const_maybe_accessor: ($) => seq(alias($._identifier_no_period, $.identifier), repeat(seq('.', alias($.identifier, $.enum_member)))),
+    const_maybe_accessor: ($) => seq(alias($._identifier_no_period, $.identifier), repeat(seq('.', $._enum_member))),
 
     numeric_operator: () => choice('+', '-'),
 
@@ -467,6 +468,7 @@ module.exports = grammar({
     _annotation_identifier: ($) => alias($.identifier, $.annotation_identifier),
     _const_identifier: ($) => alias($.identifier, $.const_identifier),
     _enum_identifier: ($) => alias($.identifier, $.enum_identifier),
+    _enum_member: ($) => alias($.identifier, $.enum_member),
     _field_identifier: ($) => alias($.identifier, $.field_identifier),
     _param_identifier: ($) => alias($.identifier, $.param_identifier),
     _type_identifier: ($) => alias($.identifier, $.type_identifier),

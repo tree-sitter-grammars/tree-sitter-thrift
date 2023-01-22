@@ -59,16 +59,16 @@ const set<GreekGodGoddessType> BEAUTY = [ GreekGodGoddess.APHRODITE, GreekGodGod
           (namespace_definition)))
       (definition
         (enum
-          (type_identifier)
           (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)
-          (enum_identifier)
+          (enum_member)
           (list_separator)))
       (definition
         (typedef
