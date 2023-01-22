@@ -193,7 +193,10 @@ module.exports = grammar({
     $._enum_member,
     $._field_identifier,
     $._param_identifier,
+    $._return_type_identifier,
     $._type_identifier,
+
+    $._return_type,
   ],
 
   rules: {
@@ -325,6 +328,19 @@ module.exports = grammar({
       optional($.list_separator),
     ),
 
+    return_type: ($) => seq(
+      optional($.field_id),
+      optional($.field_modifier),
+      alias($.field_type, $.return_type),
+      $._return_type_identifier,
+      optional(seq('=', $.const_value)),
+      optional('xsd_optional'),
+      optional('xsd_nillable'),
+      optional($.xsd_attrs),
+      optional($.annotation),
+      optional($.list_separator),
+    ),
+
     recursive_field: ($) =>
       seq(
         optional($.field_id),
@@ -355,7 +371,7 @@ module.exports = grammar({
 
     function_type: ($) => choice($.field_type, 'void'),
 
-    throws: ($) => seq('throws', '(', repeat($.field), ')'),
+    throws: ($) => seq('throws', '(', repeat($.return_type), ')'),
 
     field_type: ($) => choice($.identifier, $.primitive_type, $.container_type),
 
@@ -471,6 +487,7 @@ module.exports = grammar({
     _enum_member: ($) => alias($.identifier, $.enum_member),
     _field_identifier: ($) => alias($.identifier, $.field_identifier),
     _param_identifier: ($) => alias($.identifier, $.param_identifier),
+    _return_type_identifier: ($) => alias($.identifier, $.return_type_identifier),
     _type_identifier: ($) => alias($.identifier, $.type_identifier),
 
     st_identifier: () => /[A-Za-z_][A-Za-z0-9._-]*/,

@@ -363,12 +363,12 @@ service Calculator extends shared.SharedService {
                 (identifier))
               (param_identifier))
             (throws
-              (field
+              (return_type
                 (field_id
                   (number))
-                (field_type
+                (return_type
                   (identifier))
-                (field_identifier)))
+                (return_type_identifier)))
             (list_separator))
           (comment)
           (function
