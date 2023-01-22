@@ -479,10 +479,6 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "list_separator",
           "named": true
         },
@@ -492,6 +488,10 @@
         },
         {
           "type": "throws",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         }
       ]

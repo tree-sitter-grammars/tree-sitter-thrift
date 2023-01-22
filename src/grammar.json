@@ -1273,7 +1273,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_type_identifier"
         },
         {
           "type": "STRING",
