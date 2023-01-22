@@ -1,11 +1,77 @@
 /* eslint-disable camelcase */
 
+/**
+* Creates a rule to match one or more of the rules separated by the separator
+* and optionally adds a trailing separator (default is false).
+*
+* @param {_} rule
+* @param {string} separator - The separator to use.
+* @param {string?} trailing_separator - The trailing separator to use.
+*
+* @return {_}
+*/
 const list_seq = (rule, separator, trailing_separator = false) =>
   trailing_separator ?
     seq(rule, repeat(seq(separator, rule)), optional(separator)) :
     seq(rule, repeat(seq(separator, rule)));
 
 const primitives = ['binary', 'bool', 'byte', 'i8', 'i16', 'i32', 'i64', 'double', 'string', 'slist'];
+
+const namespace_languages = [
+  'as3',
+  'c_glib',
+  'cl',
+  'cocoa',
+  'cpp',
+  'cpp2',
+  'cpp.noexist',
+  'csharp',
+  'd',
+  'dart',
+  'delphi',
+  'erl',
+  'go',
+  'haxe',
+  'java',
+  'javame',
+  'js',
+  'kotlin',
+  'lua',
+  'netcore',
+  'netstd',
+  'nodejs',
+  'nodets',
+  'noexist',
+  'ocaml',
+  'perl',
+  'php',
+  'php.path',
+  'py',
+  'py.twisted',
+  'rb',
+  'rs',
+  'smalltalk.prefix',
+  'smalltalk.category',
+  'st',
+  'swift',
+  'ts',
+  'xml',
+  'xsd',
+
+  // The following are deprecated and should not really be used, but are added for legacy code
+  'cocoa_prefix',
+  'cpp_namespace',
+  'csharp_namespace',
+  'delphi_namespace',
+  'java_package',
+  'perl_package',
+  'php_namespace',
+  'py_module',
+  'ruby_namespace',
+  'smalltalk_category',
+  'smalltalk_prefix',
+  'xsd_namespace',
+];
 
 const invalid = [
   'BEGIN',
@@ -129,65 +195,11 @@ module.exports = grammar({
 
     cpp_include: ($) => seq('cpp_include', $.include_path),
 
-    namespace: ($) => seq('namespace', $.namespace_scope, $.identifier, optional($.namespace_uri)),
+    namespace: ($) => seq('namespace', $.namespace_scope, alias($.identifier, $.namespace_definition), optional($.namespace_uri)),
 
-    namespace_scope: () =>
-      choice(
-        '*',
-        'as3',
-        'c_glib',
-        'cl',
-        'cocoa',
-        'cpp',
-        'cpp2',
-        'cpp.noexist',
-        'csharp',
-        'd',
-        'dart',
-        'delphi',
-        'erl',
-        'go',
-        'haxe',
-        'java',
-        'javame',
-        'js',
-        'kotlin',
-        'lua',
-        'netcore',
-        'netstd',
-        'nodejs',
-        'nodets',
-        'noexist',
-        'ocaml',
-        'perl',
-        'php',
-        'php.path',
-        'py',
-        'py.twisted',
-        'rb',
-        'rs',
-        'smalltalk.prefix',
-        'smalltalk.category',
-        'st',
-        'swift',
-        'ts',
-        'xml',
-        'xsd',
+    namespace_scope: () => choice('*', ...namespace_languages),
 
-        // The following are deprecated and should not really be used, but are added for legacy code
-        'cocoa_prefix',
-        'cpp_namespace',
-        'csharp_namespace',
-        'delphi_namespace',
-        'java_package',
-        'perl_package',
-        'php_namespace',
-        'py_module',
-        'ruby_namespace',
-        'smalltalk_category',
-        'smalltalk_prefix',
-        'xsd_namespace',
-      ),
+    annotation_scope: () => choice(...namespace_languages),
 
     namespace_uri: ($) => seq('(', 'uri', '=', field('uri', $.string_literal), ')'),
 
