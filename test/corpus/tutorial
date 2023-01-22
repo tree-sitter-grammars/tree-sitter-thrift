@@ -331,20 +331,18 @@ service Calculator extends shared.SharedService {
                 (primitive_type)))
             (type_identifier)
             (parameter
-              (field
-                (field_id
-                  (number))
-                (field_type
-                  (primitive_type))
-                (field_identifier)
-                (list_separator)))
+              (field_id
+                (number))
+              (param_type
+                (primitive_type))
+              (param_identifier)
+              (list_separator))
             (parameter
-              (field
-                (field_id
-                  (number))
-                (field_type
-                  (primitive_type))
-                (field_identifier)))
+              (field_id
+                (number))
+              (param_type
+                (primitive_type))
+              (param_identifier))
             (list_separator))
           (function
             (function_type
@@ -352,20 +350,18 @@ service Calculator extends shared.SharedService {
                 (primitive_type)))
             (type_identifier)
             (parameter
-              (field
-                (field_id
-                  (number))
-                (field_type
-                  (primitive_type))
-                (field_identifier)
-                (list_separator)))
+              (field_id
+                (number))
+              (param_type
+                (primitive_type))
+              (param_identifier)
+              (list_separator))
             (parameter
-              (field
-                (field_id
-                  (number))
-                (field_type
-                  (identifier))
-                (field_identifier)))
+              (field_id
+                (number))
+              (param_type
+                (identifier))
+              (param_identifier))
             (throws
               (field
                 (field_id

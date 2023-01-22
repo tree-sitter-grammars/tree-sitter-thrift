@@ -191,6 +191,7 @@ module.exports = grammar({
     $._const_identifier,
     $._enum_identifier,
     $._field_identifier,
+    $._param_identifier,
     $._type_identifier,
   ],
 
@@ -310,7 +311,18 @@ module.exports = grammar({
         optional($.list_separator),
       ),
 
-    parameter: ($) => $.field,
+    parameter: ($) => seq(
+      optional($.field_id),
+      optional($.field_modifier),
+      alias($.field_type, $.param_type),
+      $._param_identifier,
+      optional(seq('=', $.const_value)),
+      optional('xsd_optional'),
+      optional('xsd_nillable'),
+      optional($.xsd_attrs),
+      optional($.annotation),
+      optional($.list_separator),
+    ),
 
     recursive_field: ($) =>
       seq(
@@ -398,7 +410,7 @@ module.exports = grammar({
         $.const_list,
         $.const_map,
       ),
-    const_maybe_accessor: ($) => seq(alias($._identifier_no_period, $.identifier), repeat1(seq('.', alias($.identifier, $.enum_member)))),
+    const_maybe_accessor: ($) => seq(alias($._identifier_no_period, $.identifier), repeat(seq('.', alias($.identifier, $.enum_member)))),
 
     numeric_operator: () => choice('+', '-'),
 
@@ -456,6 +468,7 @@ module.exports = grammar({
     _const_identifier: ($) => alias($.identifier, $.const_identifier),
     _enum_identifier: ($) => alias($.identifier, $.enum_identifier),
     _field_identifier: ($) => alias($.identifier, $.field_identifier),
+    _param_identifier: ($) => alias($.identifier, $.param_identifier),
     _type_identifier: ($) => alias($.identifier, $.type_identifier),
 
     st_identifier: () => /[A-Za-z_][A-Za-z0-9._-]*/,
