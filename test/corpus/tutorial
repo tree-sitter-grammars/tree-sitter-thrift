@@ -323,13 +323,13 @@ service Calculator extends shared.SharedService {
           (comment)
           (function
             (function_type)
-            (identifier)
+            (type_identifier)
             (list_separator))
           (function
             (function_type
               (field_type
                 (primitive_type)))
-            (identifier)
+            (type_identifier)
             (parameter
               (field
                 (field_id
@@ -350,7 +350,7 @@ service Calculator extends shared.SharedService {
             (function_type
               (field_type
                 (primitive_type)))
-            (identifier)
+            (type_identifier)
             (parameter
               (field
                 (field_id
@@ -377,5 +377,5 @@ service Calculator extends shared.SharedService {
           (comment)
           (function
             (function_type)
-            (identifier))))
+            (type_identifier))))
       (comment))

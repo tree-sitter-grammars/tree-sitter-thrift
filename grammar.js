@@ -331,7 +331,7 @@ module.exports = grammar({
       seq(
         optional(choice('oneway', 'async')), // async is deprecated
         $.function_type,
-        $.identifier,
+        $._type_identifier,
         '(',
         repeat($.parameter),
         ')',

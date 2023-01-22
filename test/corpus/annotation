@@ -499,7 +499,7 @@ service foo_service {
           (type_identifier)
           (function
             (function_type)
-            (identifier)
+            (type_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
@@ -523,7 +523,7 @@ service foo_service {
           (type_identifier)
           (function
             (function_type)
-            (identifier)
+            (type_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
@@ -554,28 +554,28 @@ service deprecate_everything {
           (type_identifier)
           (function
             (function_type)
-            (identifier)
+            (type_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
               (annotation_value)))
           (function
             (function_type)
-            (identifier)
+            (type_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
               (annotation_value)))
           (function
             (function_type)
-            (identifier)
+            (type_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
               (annotation_value)))
           (function
             (function_type)
-            (identifier)
+            (type_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))))
