@@ -33,16 +33,16 @@ struct CrazyNesting {
 
 ---
 
-(document
+ (document
       (definition
         (struct
-          (identifier)
+          (type_identifier)
           (field
             (field_id
               (number))
             (field_type
               (primitive_type))
-            (identifier)
+            (field_identifier)
             (list_separator))
           (field
             (field_id
@@ -53,7 +53,7 @@ struct CrazyNesting {
                 (set_type
                   (field_type
                     (identifier)))))
-            (identifier)
+            (field_identifier)
             (list_separator))
           (comment)
           (field
@@ -72,11 +72,11 @@ struct CrazyNesting {
                               (field_type
                                 (primitive_type)))))
                         (annotation
-                          (language_annotation
-                            (identifier))
-                          (string_literal))
+                          (annotation_definition
+                            (annotation_identifier))
+                          (annotation_value))
                         (field_type
-                (container_type
+                          (container_type
                             (map_type
                               (field_type
                                 (primitive_type))
@@ -94,24 +94,24 @@ struct CrazyNesting {
                                                 (field_type
                                                   (primitive_type)))))
                                           (annotation
-                                            (language_annotation
-                                              (identifier))
-                                            (string_literal)))))
+                                            (annotation_definition
+                                              (annotation_identifier))
+                                            (annotation_value)))))
                                     (annotation
-                                      (language_annotation
-                                        (identifier))
-                                      (string_literal))))))))))))))
-            (identifier)
+                                      (annotation_definition
+                                        (annotation_identifier))
+                                      (annotation_value))))))))))))))
+            (field_identifier)
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
               (primitive_type))
-            (identifier))
+            (field_identifier))
           (field
             (field_id
               (number))
             (field_type
               (identifier))
-            (identifier)))))
+            (field_identifier)))))  

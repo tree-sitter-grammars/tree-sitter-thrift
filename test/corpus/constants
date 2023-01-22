@@ -32,14 +32,14 @@ const i32 negative_hex_constant = -0x0001F
         (const
           (field_type
             (primitive_type))
-          (identifier)
+          (const_identifier)
           (const_value
             (number))))
       (definition
         (const
           (field_type
             (primitive_type))
-          (identifier)
+          (const_identifier)
           (const_value
             (number)))))
 
@@ -59,7 +59,7 @@ const double e11 = -1e10
         (const
           (field_type
             (primitive_type))
-          (identifier)
+          (const_identifier)
           (const_value
             (double))))
       (comment)
@@ -67,7 +67,7 @@ const double e11 = -1e10
         (const
           (field_type
             (primitive_type))
-          (identifier)
+          (const_identifier)
           (const_value
             (double)))))
 
@@ -92,28 +92,28 @@ const myUUID MY_GUID = '{00112233-4455-6677-8899-aaBBccDDeeFF}'
         (const
           (field_type
             (identifier))
-          (identifier)
+          (const_identifier)
           (const_value
             (string_literal))))
       (definition
         (const
           (field_type
             (identifier))
-          (identifier)
+          (const_identifier)
           (const_value
             (string_literal))))
       (definition
         (const
           (field_type
             (identifier))
-          (identifier)
+          (const_identifier)
           (const_value
             (string_literal))))
       (definition
         (const
           (field_type
             (identifier))
-          (identifier)
+          (const_identifier)
           (const_value
             (string_literal)))))
 
@@ -149,39 +149,39 @@ const set<uuid> GUID_SET = [ '{00112233-4455-6677-8899-aaBBccDDeeFF}', '00000000
 (document
       (definition
         (struct
-          (identifier)
+          (type_identifier)
           (field
             (field_id
               (number))
             (field_type
               (primitive_type))
-            (identifier)
+            (field_identifier)
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
               (primitive_type))
-            (identifier))
+            (field_identifier))
           (field
             (field_id
               (number))
             (field_type
               (identifier))
-            (identifier))
+            (field_identifier))
           (field
             (field_id
               (number))
             (field_type
               (identifier))
-            (identifier))
+            (field_identifier))
           (field
             (field_id
               (number))
             (field_modifier)
             (field_type
               (identifier))
-            (identifier))))
+            (field_identifier))))
       (definition
         (const
           (field_type
@@ -196,7 +196,7 @@ const set<uuid> GUID_SET = [ '{00112233-4455-6677-8899-aaBBccDDeeFF}', '00000000
                         (primitive_type))
                       (field_type
                         (primitive_type))))))))
-          (identifier)
+          (const_identifier)
           (const_value
             (const_map
               (const_value
@@ -221,7 +221,7 @@ const set<uuid> GUID_SET = [ '{00112233-4455-6677-8899-aaBBccDDeeFF}', '00000000
                   (primitive_type))
                 (field_type
                   (primitive_type)))))
-          (identifier)
+          (const_identifier)
           (const_value
             (const_map
               (const_value
@@ -242,7 +242,7 @@ const set<uuid> GUID_SET = [ '{00112233-4455-6677-8899-aaBBccDDeeFF}', '00000000
         (const
           (field_type
             (identifier))
-          (identifier)
+          (const_identifier)
           (const_value
             (const_map
               (const_value
@@ -278,7 +278,7 @@ const set<uuid> GUID_SET = [ '{00112233-4455-6677-8899-aaBBccDDeeFF}', '00000000
                   (primitive_type))
                 (field_type
                   (identifier)))))
-          (identifier)
+          (const_identifier)
           (const_value
             (const_map
               (const_value
@@ -316,7 +316,7 @@ const set<uuid> GUID_SET = [ '{00112233-4455-6677-8899-aaBBccDDeeFF}', '00000000
               (set_type
                 (field_type
                   (primitive_type)))))
-          (identifier)
+          (const_identifier)
           (const_value
             (const_list
               (const_value
@@ -334,7 +334,7 @@ const set<uuid> GUID_SET = [ '{00112233-4455-6677-8899-aaBBccDDeeFF}', '00000000
               (set_type
                 (field_type
                   (identifier)))))
-          (identifier)
+          (const_identifier)
           (const_value
             (const_list
               (const_value

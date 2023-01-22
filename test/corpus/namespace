@@ -30,7 +30,7 @@ namespace xsd test (uri = 'http://thrift.apache.org/ns/ThriftTest')
       (header
         (namespace
           (namespace_scope)
-          (identifier)
+          (namespace_definition)
           (namespace_uri
             (string_literal)))))
 
@@ -49,8 +49,8 @@ namespace cpp.noexist ThriftTest
       (header
         (namespace
           (namespace_scope)
-          (identifier)))
+          (namespace_definition)))
       (header
         (namespace
           (namespace_scope)
-          (identifier))))
+          (namespace_definition))))

@@ -32,7 +32,7 @@ struct RecList {
 (document
       (definition
         (struct
-          (identifier)
+          (type_identifier)
           (recursive_field
             (field_id
               (number))
@@ -44,7 +44,7 @@ struct RecList {
               (number))
             (field_type
               (primitive_type))
-            (identifier)))))
+            (field_identifier)))))
 
 
 
@@ -65,7 +65,7 @@ struct CoRec2 {
 (document
       (definition
         (struct
-          (identifier)
+          (type_identifier)
           (recursive_field
             (field_id
               (number))
@@ -74,10 +74,10 @@ struct CoRec2 {
             (identifier))))
       (definition
         (struct
-          (identifier)
+          (type_identifier)
           (field
             (field_id
               (number))
             (field_type
               (identifier))
-            (identifier)))))
+            (field_identifier)))))
