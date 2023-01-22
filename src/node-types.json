@@ -764,6 +764,61 @@
     }
   },
   {
+    "type": "return_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "container_type",
+          "named": true
+        },
+        {
+          "type": "field_id",
+          "named": true
+        },
+        {
+          "type": "field_modifier",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "list_separator",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
+          "named": true
+        },
+        {
+          "type": "return_type",
+          "named": true
+        },
+        {
+          "type": "return_type_identifier",
+          "named": true
+        },
+        {
+          "type": "xsd_attrs",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "senum",
     "named": true,
     "fields": {},
@@ -868,7 +923,7 @@
       "required": false,
       "types": [
         {
-          "type": "field",
+          "type": "return_type",
           "named": true
         }
       ]
@@ -1606,6 +1661,10 @@
   {
     "type": "return",
     "named": false
+  },
+  {
+    "type": "return_type_identifier",
+    "named": true
   },
   {
     "type": "rs",

@@ -1271,6 +1271,129 @@
         }
       ]
     },
+    "return_type": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "field_id"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "field_modifier"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "field_type"
+          },
+          "named": true,
+          "value": "return_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_return_type_identifier"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "="
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "const_value"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "xsd_optional"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "xsd_nillable"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "xsd_attrs"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "annotation"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "list_separator"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "recursive_field": {
       "type": "SEQ",
       "members": [
@@ -1475,7 +1598,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "field"
+            "name": "return_type"
           }
         },
         {
@@ -2298,6 +2421,15 @@
       "named": true,
       "value": "param_identifier"
     },
+    "_return_type_identifier": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "return_type_identifier"
+    },
     "_type_identifier": {
       "type": "ALIAS",
       "content": {
@@ -2817,7 +2949,9 @@
     "_enum_member",
     "_field_identifier",
     "_param_identifier",
-    "_type_identifier"
+    "_return_type_identifier",
+    "_type_identifier",
+    "ReferenceError"
   ],
   "supertypes": []
 }
