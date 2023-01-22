@@ -666,7 +666,7 @@
     }
   },
   {
-    "type": "parameter",
+    "type": "param_type",
     "named": true,
     "fields": {},
     "children": {
@@ -674,7 +674,58 @@
       "required": true,
       "types": [
         {
-          "type": "field",
+          "type": "container_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_id",
+          "named": true
+        },
+        {
+          "type": "field_modifier",
+          "named": true
+        },
+        {
+          "type": "list_separator",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "param_type",
+          "named": true
+        },
+        {
+          "type": "xsd_attrs",
           "named": true
         }
       ]
@@ -1162,11 +1213,11 @@
   },
   {
     "type": "double",
-    "named": false
+    "named": true
   },
   {
     "type": "double",
-    "named": true
+    "named": false
   },
   {
     "type": "dynamic",
@@ -1467,6 +1518,10 @@
   {
     "type": "package",
     "named": false
+  },
+  {
+    "type": "param_identifier",
+    "named": true
   },
   {
     "type": "pass",
