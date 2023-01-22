@@ -186,6 +186,14 @@ module.exports = grammar({
 
   word: ($) => $.identifier,
 
+  inline: ($) => [
+    $._annotation_identifier,
+    $._const_identifier,
+    $._enum_identifier,
+    $._field_identifier,
+    $._type_identifier,
+  ],
+
   rules: {
     document: ($) => seq(repeat($.header), repeat($.definition)),
 
@@ -219,7 +227,7 @@ module.exports = grammar({
       seq(
         'const',
         $.field_type,
-        $.identifier,
+        $._const_identifier,
         '=',
         $.const_value,
         optional($.annotation),
@@ -231,11 +239,11 @@ module.exports = grammar({
     enum: ($) =>
       seq(
         'enum',
-        $.identifier,
+        $._type_identifier,
         '{',
         repeat(
           seq(
-            $.identifier,
+            $._enum_identifier,
             optional(seq('=', $.number)),
             optional($.annotation),
             optional($.list_separator),
@@ -248,7 +256,7 @@ module.exports = grammar({
     senum: ($) =>
       seq(
         'senum',
-        $.identifier,
+        $._type_identifier,
         '{',
         repeat(seq($.string_literal, optional($.list_separator))),
         '}',
@@ -257,7 +265,7 @@ module.exports = grammar({
     struct: ($) =>
       seq(
         'struct',
-        $.identifier,
+        $._type_identifier,
         optional('xsd_all'),
         '{',
         repeat(choice($.field, $.recursive_field)),
@@ -268,20 +276,20 @@ module.exports = grammar({
     union: ($) =>
       seq(
         'union',
-        $.identifier,
+        $._type_identifier,
         optional('xsd_all'),
         '{',
         repeat($.field),
         '}',
       ),
 
-    exception: ($) => seq('exception', $.identifier, '{', repeat($.field), '}', optional($.annotation)),
+    exception: ($) => seq('exception', $._type_identifier, '{', repeat($.field), '}', optional($.annotation)),
 
     service: ($) =>
       seq(
         'service',
-        $.identifier,
-        optional(seq('extends', $.identifier)),
+        $._type_identifier,
+        optional(seq('extends', $._type_identifier)),
         '{',
         repeat($.function),
         '}',
@@ -293,7 +301,7 @@ module.exports = grammar({
         optional($.field_id),
         optional($.field_modifier),
         $.field_type,
-        $.identifier,
+        $._field_identifier,
         optional(seq('=', $.const_value)),
         optional('xsd_optional'),
         optional('xsd_nillable'),
@@ -365,17 +373,17 @@ module.exports = grammar({
     annotation: ($) =>
       seq(
         '(',
-        list_seq(seq($.language_annotation, optional(seq('=', field('value', $.string_literal)))), ',', true),
+        list_seq(
+          seq(choice($.annotation_definition), optional(seq('=', alias($.string_literal, $.annotation_value)))),
+          ',',
+          true),
         ')',
       ),
 
-    language_annotation: ($) => field('language_specific_type', $.identifier),
-
-    annotation_lang: () =>
-      choice(
-        'cpp',
-        'java',
-        'python',
+    annotation_definition: ($) =>
+      seq(
+        $._annotation_identifier,
+        repeat(seq('.', $._field_identifier)),
       ),
 
     custom_type: ($) => $.identifier,
@@ -386,10 +394,11 @@ module.exports = grammar({
         $.double,
         $.boolean,
         $.string_literal,
-        $.identifier,
+        $.const_maybe_accessor,
         $.const_list,
         $.const_map,
       ),
+    const_maybe_accessor: ($) => seq(alias($._identifier_no_period, $.identifier), repeat1(seq('.', alias($.identifier, $.enum_member)))),
 
     numeric_operator: () => choice('+', '-'),
 
@@ -441,6 +450,13 @@ module.exports = grammar({
     include_path: ($) => $.string_literal,
 
     identifier: () => /[A-Za-z_][A-Za-z0-9._]*/,
+    _identifier_no_period: () => /[A-Za-z_][A-Za-z0-9_]*/,
+
+    _annotation_identifier: ($) => alias($.identifier, $.annotation_identifier),
+    _const_identifier: ($) => alias($.identifier, $.const_identifier),
+    _enum_identifier: ($) => alias($.identifier, $.enum_identifier),
+    _field_identifier: ($) => alias($.identifier, $.field_identifier),
+    _type_identifier: ($) => alias($.identifier, $.type_identifier),
 
     st_identifier: () => /[A-Za-z_][A-Za-z0-9._-]*/,
 
