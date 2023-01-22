@@ -339,15 +339,15 @@
           "named": true
         },
         {
+          "type": "enum_member",
+          "named": true
+        },
+        {
           "type": "list_separator",
           "named": true
         },
         {
           "type": "number",
-          "named": true
-        },
-        {
-          "type": "type_identifier",
           "named": true
         }
       ]

@@ -702,7 +702,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_type_identifier"
+          "name": "_enum_identifier"
         },
         {
           "type": "STRING",
@@ -715,7 +715,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_enum_identifier"
+                "name": "_enum_member"
               },
               {
                 "type": "CHOICE",
@@ -1942,13 +1942,8 @@
                 "value": "."
               },
               {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "identifier"
-                },
-                "named": true,
-                "value": "enum_member"
+                "type": "SYMBOL",
+                "name": "_enum_member"
               }
             ]
           }
@@ -2275,6 +2270,15 @@
       },
       "named": true,
       "value": "enum_identifier"
+    },
+    "_enum_member": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "enum_member"
     },
     "_field_identifier": {
       "type": "ALIAS",
@@ -2810,6 +2814,7 @@
     "_annotation_identifier",
     "_const_identifier",
     "_enum_identifier",
+    "_enum_member",
     "_field_identifier",
     "_param_identifier",
     "_type_identifier"
