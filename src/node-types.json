@@ -2,24 +2,36 @@
   {
     "type": "annotation",
     "named": true,
-    "fields": {
-      "value": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "language_annotation",
+          "type": "annotation_definition",
+          "named": true
+        },
+        {
+          "type": "annotation_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_identifier",
+          "named": true
+        },
+        {
+          "type": "field_identifier",
           "named": true
         }
       ]
@@ -43,15 +55,15 @@
           "named": true
         },
         {
+          "type": "const_identifier",
+          "named": true
+        },
+        {
           "type": "const_value",
           "named": true
         },
         {
           "type": "field_type",
-          "named": true
-        },
-        {
-          "type": "identifier",
           "named": true
         },
         {
@@ -100,6 +112,25 @@
     }
   },
   {
+    "type": "const_maybe_accessor",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "enum_member",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "const_value",
     "named": true,
     "fields": {},
@@ -120,11 +151,11 @@
           "named": true
         },
         {
-          "type": "double",
+          "type": "const_maybe_accessor",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "double",
           "named": true
         },
         {
@@ -304,7 +335,7 @@
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "enum_identifier",
           "named": true
         },
         {
@@ -313,6 +344,10 @@
         },
         {
           "type": "number",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         }
       ]
@@ -335,7 +370,7 @@
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "type_identifier",
           "named": true
         }
       ]
@@ -362,15 +397,15 @@
           "named": true
         },
         {
+          "type": "field_identifier",
+          "named": true
+        },
+        {
           "type": "field_modifier",
           "named": true
         },
         {
           "type": "field_type",
-          "named": true
-        },
-        {
-          "type": "identifier",
           "named": true
         },
         {
@@ -536,22 +571,6 @@
     "fields": {}
   },
   {
-    "type": "language_annotation",
-    "named": true,
-    "fields": {
-      "language_specific_type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "list_separator",
     "named": true,
     "fields": {}
@@ -611,7 +630,7 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "namespace_definition",
           "named": true
         },
         {
@@ -702,15 +721,15 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "list_separator",
           "named": true
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         }
       ]
@@ -733,7 +752,7 @@
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "type_identifier",
           "named": true
         }
       ]
@@ -779,11 +798,11 @@
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "recursive_field",
           "named": true
         },
         {
-          "type": "recursive_field",
+          "type": "type_identifier",
           "named": true
         }
       ]
@@ -844,7 +863,7 @@
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "type_identifier",
           "named": true
         }
       ]
@@ -891,6 +910,10 @@
   },
   {
     "type": "-",
+    "named": false
+  },
+  {
+    "type": ".",
     "named": false
   },
   {
@@ -968,6 +991,14 @@
   {
     "type": "and",
     "named": false
+  },
+  {
+    "type": "annotation_identifier",
+    "named": true
+  },
+  {
+    "type": "annotation_value",
+    "named": true
   },
   {
     "type": "args",
@@ -1050,6 +1081,10 @@
     "named": false
   },
   {
+    "type": "const_identifier",
+    "named": true
+  },
+  {
     "type": "continue",
     "named": false
   },
@@ -1127,11 +1162,11 @@
   },
   {
     "type": "double",
-    "named": true
+    "named": false
   },
   {
     "type": "double",
-    "named": false
+    "named": true
   },
   {
     "type": "dynamic",
@@ -1190,6 +1225,14 @@
     "named": false
   },
   {
+    "type": "enum_identifier",
+    "named": true
+  },
+  {
+    "type": "enum_member",
+    "named": true
+  },
+  {
     "type": "erl",
     "named": false
   },
@@ -1212,6 +1255,10 @@
   {
     "type": "false",
     "named": false
+  },
+  {
+    "type": "field_identifier",
+    "named": true
   },
   {
     "type": "finally",
@@ -1354,6 +1401,10 @@
     "named": false
   },
   {
+    "type": "namespace_definition",
+    "named": true
+  },
+  {
     "type": "native",
     "named": false
   },
@@ -1467,10 +1518,6 @@
   },
   {
     "type": "py_module",
-    "named": false
-  },
-  {
-    "type": "python",
     "named": false
   },
   {
@@ -1620,6 +1667,10 @@
   {
     "type": "ts",
     "named": false
+  },
+  {
+    "type": "type_identifier",
+    "named": true
   },
   {
     "type": "typedef",

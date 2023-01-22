@@ -76,8 +76,13 @@
           "name": "namespace_scope"
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          "named": true,
+          "value": "namespace_definition"
         },
         {
           "type": "CHOICE",
@@ -100,6 +105,215 @@
           "type": "STRING",
           "value": "*"
         },
+        {
+          "type": "STRING",
+          "value": "as3"
+        },
+        {
+          "type": "STRING",
+          "value": "c_glib"
+        },
+        {
+          "type": "STRING",
+          "value": "cl"
+        },
+        {
+          "type": "STRING",
+          "value": "cocoa"
+        },
+        {
+          "type": "STRING",
+          "value": "cpp"
+        },
+        {
+          "type": "STRING",
+          "value": "cpp2"
+        },
+        {
+          "type": "STRING",
+          "value": "cpp.noexist"
+        },
+        {
+          "type": "STRING",
+          "value": "csharp"
+        },
+        {
+          "type": "STRING",
+          "value": "d"
+        },
+        {
+          "type": "STRING",
+          "value": "dart"
+        },
+        {
+          "type": "STRING",
+          "value": "delphi"
+        },
+        {
+          "type": "STRING",
+          "value": "erl"
+        },
+        {
+          "type": "STRING",
+          "value": "go"
+        },
+        {
+          "type": "STRING",
+          "value": "haxe"
+        },
+        {
+          "type": "STRING",
+          "value": "java"
+        },
+        {
+          "type": "STRING",
+          "value": "javame"
+        },
+        {
+          "type": "STRING",
+          "value": "js"
+        },
+        {
+          "type": "STRING",
+          "value": "kotlin"
+        },
+        {
+          "type": "STRING",
+          "value": "lua"
+        },
+        {
+          "type": "STRING",
+          "value": "netcore"
+        },
+        {
+          "type": "STRING",
+          "value": "netstd"
+        },
+        {
+          "type": "STRING",
+          "value": "nodejs"
+        },
+        {
+          "type": "STRING",
+          "value": "nodets"
+        },
+        {
+          "type": "STRING",
+          "value": "noexist"
+        },
+        {
+          "type": "STRING",
+          "value": "ocaml"
+        },
+        {
+          "type": "STRING",
+          "value": "perl"
+        },
+        {
+          "type": "STRING",
+          "value": "php"
+        },
+        {
+          "type": "STRING",
+          "value": "php.path"
+        },
+        {
+          "type": "STRING",
+          "value": "py"
+        },
+        {
+          "type": "STRING",
+          "value": "py.twisted"
+        },
+        {
+          "type": "STRING",
+          "value": "rb"
+        },
+        {
+          "type": "STRING",
+          "value": "rs"
+        },
+        {
+          "type": "STRING",
+          "value": "smalltalk.prefix"
+        },
+        {
+          "type": "STRING",
+          "value": "smalltalk.category"
+        },
+        {
+          "type": "STRING",
+          "value": "st"
+        },
+        {
+          "type": "STRING",
+          "value": "swift"
+        },
+        {
+          "type": "STRING",
+          "value": "ts"
+        },
+        {
+          "type": "STRING",
+          "value": "xml"
+        },
+        {
+          "type": "STRING",
+          "value": "xsd"
+        },
+        {
+          "type": "STRING",
+          "value": "cocoa_prefix"
+        },
+        {
+          "type": "STRING",
+          "value": "cpp_namespace"
+        },
+        {
+          "type": "STRING",
+          "value": "csharp_namespace"
+        },
+        {
+          "type": "STRING",
+          "value": "delphi_namespace"
+        },
+        {
+          "type": "STRING",
+          "value": "java_package"
+        },
+        {
+          "type": "STRING",
+          "value": "perl_package"
+        },
+        {
+          "type": "STRING",
+          "value": "php_namespace"
+        },
+        {
+          "type": "STRING",
+          "value": "py_module"
+        },
+        {
+          "type": "STRING",
+          "value": "ruby_namespace"
+        },
+        {
+          "type": "STRING",
+          "value": "smalltalk_category"
+        },
+        {
+          "type": "STRING",
+          "value": "smalltalk_prefix"
+        },
+        {
+          "type": "STRING",
+          "value": "xsd_namespace"
+        }
+      ]
+    },
+    "annotation_scope": {
+      "type": "CHOICE",
+      "members": [
         {
           "type": "STRING",
           "value": "as3"
@@ -385,7 +599,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_const_identifier"
         },
         {
           "type": "STRING",
@@ -488,7 +702,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_type_identifier"
         },
         {
           "type": "STRING",
@@ -501,7 +715,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "identifier"
+                "name": "_enum_identifier"
               },
               {
                 "type": "CHOICE",
@@ -578,7 +792,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_type_identifier"
         },
         {
           "type": "STRING",
@@ -623,7 +837,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_type_identifier"
         },
         {
           "type": "CHOICE",
@@ -684,7 +898,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_type_identifier"
         },
         {
           "type": "CHOICE",
@@ -724,7 +938,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_type_identifier"
         },
         {
           "type": "STRING",
@@ -764,7 +978,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_type_identifier"
         },
         {
           "type": "CHOICE",
@@ -778,7 +992,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "identifier"
+                  "name": "_type_identifier"
                 }
               ]
             },
@@ -849,7 +1063,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_field_identifier"
         },
         {
           "type": "CHOICE",
@@ -1417,8 +1631,13 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "language_annotation"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "annotation_definition"
+                    }
+                  ]
                 },
                 {
                   "type": "CHOICE",
@@ -1431,12 +1650,13 @@
                           "value": "="
                         },
                         {
-                          "type": "FIELD",
-                          "name": "value",
+                          "type": "ALIAS",
                           "content": {
                             "type": "SYMBOL",
                             "name": "string_literal"
-                          }
+                          },
+                          "named": true,
+                          "value": "annotation_value"
                         }
                       ]
                     },
@@ -1460,8 +1680,13 @@
                     "type": "SEQ",
                     "members": [
                       {
-                        "type": "SYMBOL",
-                        "name": "language_annotation"
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "annotation_definition"
+                          }
+                        ]
                       },
                       {
                         "type": "CHOICE",
@@ -1474,12 +1699,13 @@
                                 "value": "="
                               },
                               {
-                                "type": "FIELD",
-                                "name": "value",
+                                "type": "ALIAS",
                                 "content": {
                                   "type": "SYMBOL",
                                   "name": "string_literal"
-                                }
+                                },
+                                "named": true,
+                                "value": "annotation_value"
                               }
                             ]
                           },
@@ -1513,28 +1739,28 @@
         }
       ]
     },
-    "language_annotation": {
-      "type": "FIELD",
-      "name": "language_specific_type",
-      "content": {
-        "type": "SYMBOL",
-        "name": "identifier"
-      }
-    },
-    "annotation_lang": {
-      "type": "CHOICE",
+    "annotation_definition": {
+      "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "cpp"
+          "type": "SYMBOL",
+          "name": "_annotation_identifier"
         },
         {
-          "type": "STRING",
-          "value": "java"
-        },
-        {
-          "type": "STRING",
-          "value": "python"
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "."
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_field_identifier"
+              }
+            ]
+          }
         }
       ]
     },
@@ -1563,7 +1789,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "const_maybe_accessor"
         },
         {
           "type": "SYMBOL",
@@ -1572,6 +1798,41 @@
         {
           "type": "SYMBOL",
           "name": "const_map"
+        }
+      ]
+    },
+    "const_maybe_accessor": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_identifier_no_period"
+          },
+          "named": true,
+          "value": "identifier"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "."
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                "named": true,
+                "value": "enum_member"
+              }
+            ]
+          }
         }
       ]
     },
@@ -1864,6 +2125,55 @@
     "identifier": {
       "type": "PATTERN",
       "value": "[A-Za-z_][A-Za-z0-9._]*"
+    },
+    "_identifier_no_period": {
+      "type": "PATTERN",
+      "value": "[A-Za-z_][A-Za-z0-9_]*"
+    },
+    "_annotation_identifier": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "annotation_identifier"
+    },
+    "_const_identifier": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "const_identifier"
+    },
+    "_enum_identifier": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "enum_identifier"
+    },
+    "_field_identifier": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "field_identifier"
+    },
+    "_type_identifier": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "type_identifier"
     },
     "st_identifier": {
       "type": "PATTERN",
@@ -2368,7 +2678,13 @@
   "conflicts": [],
   "precedences": [],
   "externals": [],
-  "inline": [],
+  "inline": [
+    "_annotation_identifier",
+    "_const_identifier",
+    "_enum_identifier",
+    "_field_identifier",
+    "_type_identifier"
+  ],
   "supertypes": []
 }
 
