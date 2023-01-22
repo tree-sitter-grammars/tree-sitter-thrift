@@ -142,7 +142,7 @@
 
 ["[" "]"] @punctuation.bracket
 
-["<" ">"] @puncutation.bracket
+["<" ">"] @punctuation.bracket
 
 [
   ";"
