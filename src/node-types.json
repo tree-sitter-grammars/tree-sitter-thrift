@@ -112,7 +112,7 @@
     }
   },
   {
-    "type": "const_maybe_accessor",
+    "type": "const_value",
     "named": true,
     "fields": {},
     "children": {
@@ -120,26 +120,11 @@
       "required": true,
       "types": [
         {
-          "type": "enum_member",
+          "type": "boolean",
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "const_value",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "boolean",
+          "type": "const_identifier",
           "named": true
         },
         {
@@ -148,10 +133,6 @@
         },
         {
           "type": "const_map",
-          "named": true
-        },
-        {
-          "type": "const_maybe_accessor",
           "named": true
         },
         {
@@ -164,6 +145,10 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         }
       ]
@@ -761,17 +746,20 @@
   {
     "type": "namespace_uri",
     "named": true,
-    "fields": {
-      "uri": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "uri",
+          "named": true
+        },
+        {
+          "type": "uri_def",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1835,7 +1823,11 @@
   },
   {
     "type": "uri",
-    "named": false
+    "named": true
+  },
+  {
+    "type": "uri_def",
+    "named": true
   },
   {
     "type": "use",
