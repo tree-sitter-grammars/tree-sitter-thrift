@@ -217,7 +217,7 @@ module.exports = grammar({
 
     annotation_scope: () => choice(...namespace_languages),
 
-    namespace_uri: ($) => seq('(', 'uri', '=', field('uri', $.string_literal), ')'),
+    namespace_uri: ($) => seq('(', alias('uri', $.uri_def), '=', alias($.string_literal, $.uri), ')'),
 
     definition: ($) =>
       choice(
@@ -426,11 +426,20 @@ module.exports = grammar({
         $.double,
         $.boolean,
         $.string_literal,
-        $.const_maybe_accessor,
+        $._internal_const_identifier,
         $.const_list,
         $.const_map,
       ),
-    const_maybe_accessor: ($) => seq(alias($._identifier_no_period, $.identifier), repeat(seq('.', $._enum_member))),
+    // const_maybe_accessor: ($) => seq(alias($._identifier_no_period, $.identifier), repeat(seq('.', $._enum_member))),
+    _internal_const_identifier: ($) => choice(
+      seq(
+      // Foo.Bar.Etc...
+        repeat1(seq(alias($._identifier_no_period, $.type_identifier), '.')),
+        // ... Baz
+        alias($._identifier_no_period, $.const_identifier),
+      ),
+      alias($._identifier_no_period, $.const_identifier),
+    ),
 
     numeric_operator: () => choice('+', '-'),
 
