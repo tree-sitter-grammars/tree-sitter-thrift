@@ -32,7 +32,8 @@ namespace xsd test (uri = 'http://thrift.apache.org/ns/ThriftTest')
           (namespace_scope)
           (namespace_definition)
           (namespace_uri
-            (string_literal)))))
+            (uri_def)
+            (uri)))))
 
 
 

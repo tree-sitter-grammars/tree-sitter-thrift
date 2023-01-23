@@ -145,16 +145,14 @@ const set<GreekGodGoddessType> BEAUTY = [ GreekGodGoddess.APHRODITE, GreekGodGod
           (const_value
             (const_map
               (const_value
-                (const_maybe_accessor
-                  (identifier)
-                  (enum_member)))
+                (type_identifier)
+                (const_identifier))
               (const_value
                 (string_literal))
               (list_separator)
               (const_value
-                (const_maybe_accessor
-                  (identifier)
-                  (enum_member)))
+                (type_identifier)
+                (const_identifier))
               (const_value
                 (string_literal))
               (list_separator)))))
@@ -169,11 +167,9 @@ const set<GreekGodGoddessType> BEAUTY = [ GreekGodGoddess.APHRODITE, GreekGodGod
           (const_value
             (const_list
               (const_value
-                (const_maybe_accessor
-                  (identifier)
-                  (enum_member)))
+                (type_identifier)
+                (const_identifier))
               (list_separator)
               (const_value
-                (const_maybe_accessor
-                  (identifier)
-                  (enum_member))))))))
+                (type_identifier)
+                (const_identifier)))))))
