@@ -251,7 +251,7 @@ service Calculator extends shared.SharedService {
       (comment)
       (definition
         (enum
-		  (enum_identifier)
+          (enum_identifier)
           (enum_member)
           (number)
           (list_separator)
@@ -324,54 +324,59 @@ service Calculator extends shared.SharedService {
           (function
             (function_type)
             (function_identifier)
+            (function_parameters)
             (list_separator))
           (function
             (function_type
               (field_type
                 (primitive_type)))
             (function_identifier)
-            (function_parameter
-              (field_id
-                (number))
-              (param_type
-                (primitive_type))
-              (param_identifier)
-              (list_separator))
-            (function_parameter
-              (field_id
-                (number))
-              (param_type
-                (primitive_type))
-              (param_identifier))
-            (list_separator))
-          (function
-            (function_type
-              (field_type
-                (primitive_type)))
-            (function_identifier)
-            (function_parameter
-              (field_id
-                (number))
-              (param_type
-                (primitive_type))
-              (param_identifier)
-              (list_separator))
-            (function_parameter
-              (field_id
-                (number))
-              (param_type
-                (identifier))
-              (param_identifier))
-            (throws
-              (exception_param
+            (function_parameters
+              (function_parameter
                 (field_id
                   (number))
-                (exception_param_type
+                (param_type
+                  (primitive_type))
+                (param_identifier)
+                (list_separator))
+              (function_parameter
+                (field_id
+                  (number))
+                (param_type
+                  (primitive_type))
+                (param_identifier)))
+            (list_separator))
+          (function
+            (function_type
+              (field_type
+                (primitive_type)))
+            (function_identifier)
+            (function_parameters
+              (function_parameter
+                (field_id
+                  (number))
+                (param_type
+                  (primitive_type))
+                (param_identifier)
+                (list_separator))
+              (function_parameter
+                (field_id
+                  (number))
+                (param_type
                   (identifier))
-                (exception_param_identifier)))
+                (param_identifier)))
+            (throws
+              (exception_parameters
+                (exception_parameter
+                  (field_id
+                    (number))
+                  (exception_param_type
+                    (identifier))
+                  (exception_param_identifier))))
             (list_separator))
           (comment)
           (function
             (function_type)
-            (function_identifier))))
+            (function_identifier)
+            (function_parameters))))
       (comment))

@@ -1277,7 +1277,27 @@
         }
       ]
     },
-    "exception_param": {
+    "function_parameters": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "function_parameter"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "exception_parameter": {
       "type": "SEQ",
       "members": [
         {
@@ -1397,6 +1417,26 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "exception_parameters": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "exception_parameter"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },
@@ -1524,19 +1564,8 @@
           "name": "_function_identifier"
         },
         {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "function_parameter"
-          }
-        },
-        {
-          "type": "STRING",
-          "value": ")"
+          "type": "SYMBOL",
+          "name": "function_parameters"
         },
         {
           "type": "CHOICE",
@@ -1597,19 +1626,8 @@
           "value": "throws"
         },
         {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "exception_param"
-          }
-        },
-        {
-          "type": "STRING",
-          "value": ")"
+          "type": "SYMBOL",
+          "name": "exception_parameters"
         }
       ]
     },

@@ -362,7 +362,30 @@
     }
   },
   {
-    "type": "exception_param",
+    "type": "exception_param_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "container_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exception_parameter",
     "named": true,
     "fields": {},
     "children": {
@@ -405,23 +428,15 @@
     }
   },
   {
-    "type": "exception_param_type",
+    "type": "exception_parameters",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "container_type",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "primitive_type",
+          "type": "exception_parameter",
           "named": true
         }
       ]
@@ -530,7 +545,7 @@
           "named": true
         },
         {
-          "type": "function_parameter",
+          "type": "function_parameters",
           "named": true
         },
         {
@@ -586,6 +601,21 @@
         },
         {
           "type": "xsd_attrs",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_parameters",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "function_parameter",
           "named": true
         }
       ]
@@ -918,11 +948,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
-          "type": "exception_param",
+          "type": "exception_parameters",
           "named": true
         }
       ]

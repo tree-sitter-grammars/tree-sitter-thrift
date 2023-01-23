@@ -500,6 +500,7 @@ service foo_service {
           (function
             (function_type)
             (function_identifier)
+			(function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))
@@ -524,6 +525,7 @@ service foo_service {
           (function
             (function_type)
             (function_identifier)
+			(function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))
@@ -555,6 +557,7 @@ service deprecate_everything {
           (function
             (function_type)
             (function_identifier)
+			(function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))
@@ -562,6 +565,7 @@ service deprecate_everything {
           (function
             (function_type)
             (function_identifier)
+			(function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))
@@ -569,6 +573,7 @@ service deprecate_everything {
           (function
             (function_type)
             (function_identifier)
+			(function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))
@@ -576,6 +581,7 @@ service deprecate_everything {
           (function
             (function_type)
             (function_identifier)
+			(function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))))

@@ -330,8 +330,9 @@ module.exports = grammar({
       optional($.annotation),
       optional($.list_separator),
     ),
+    function_parameters: ($) => seq('(', repeat($.function_parameter), ')'),
 
-    exception_param: ($) => seq(
+    exception_parameter: ($) => seq(
       optional($.field_id),
       optional($.field_modifier),
       alias($.field_type, $.exception_param_type),
@@ -343,6 +344,7 @@ module.exports = grammar({
       optional($.annotation),
       optional($.list_separator),
     ),
+    exception_parameters: ($) => seq('(', repeat($.exception_parameter), ')'),
 
     recursive_field: ($) =>
       seq(
@@ -364,9 +366,7 @@ module.exports = grammar({
         optional(choice('oneway', 'async')), // async is deprecated
         $.function_type,
         $._function_identifier,
-        '(',
-        repeat($.function_parameter),
-        ')',
+        $.function_parameters,
         optional($.throws),
         optional($.annotation),
         optional($.list_separator),
@@ -374,7 +374,7 @@ module.exports = grammar({
 
     function_type: ($) => choice($.field_type, 'void'),
 
-    throws: ($) => seq('throws', '(', repeat($.exception_param), ')'),
+    throws: ($) => seq('throws', $.exception_parameters),
 
     field_type: ($) => choice($.identifier, $.primitive_type, $.container_type),
 
