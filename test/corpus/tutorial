@@ -301,7 +301,7 @@ service Calculator extends shared.SharedService {
       (comment)
       (definition
         (exception
-          (type_identifier)
+          (exception_identifier)
           (field
             (field_id
               (number))
@@ -323,21 +323,21 @@ service Calculator extends shared.SharedService {
           (comment)
           (function
             (function_type)
-            (type_identifier)
+            (function_identifier)
             (list_separator))
           (function
             (function_type
               (field_type
                 (primitive_type)))
-            (type_identifier)
-            (parameter
+            (function_identifier)
+            (function_parameter
               (field_id
                 (number))
               (param_type
                 (primitive_type))
               (param_identifier)
               (list_separator))
-            (parameter
+            (function_parameter
               (field_id
                 (number))
               (param_type
@@ -348,30 +348,30 @@ service Calculator extends shared.SharedService {
             (function_type
               (field_type
                 (primitive_type)))
-            (type_identifier)
-            (parameter
+            (function_identifier)
+            (function_parameter
               (field_id
                 (number))
               (param_type
                 (primitive_type))
               (param_identifier)
               (list_separator))
-            (parameter
+            (function_parameter
               (field_id
                 (number))
               (param_type
                 (identifier))
               (param_identifier))
             (throws
-              (return_type
+              (exception_param
                 (field_id
                   (number))
-                (return_type
+                (exception_param_type
                   (identifier))
-                (return_type_identifier)))
+                (exception_param_identifier)))
             (list_separator))
           (comment)
           (function
             (function_type)
-            (type_identifier))))
+            (function_identifier))))
       (comment))

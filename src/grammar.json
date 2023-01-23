@@ -938,7 +938,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_type_identifier"
+          "name": "_exception_identifier"
         },
         {
           "type": "STRING",
@@ -1148,7 +1148,7 @@
         }
       ]
     },
-    "parameter": {
+    "function_parameter": {
       "type": "SEQ",
       "members": [
         {
@@ -1271,7 +1271,7 @@
         }
       ]
     },
-    "return_type": {
+    "exception_param": {
       "type": "SEQ",
       "members": [
         {
@@ -1305,11 +1305,11 @@
             "name": "field_type"
           },
           "named": true,
-          "value": "return_type"
+          "value": "exception_param_type"
         },
         {
           "type": "SYMBOL",
-          "name": "_return_type_identifier"
+          "name": "_exception_param_identifier"
         },
         {
           "type": "CHOICE",
@@ -1515,7 +1515,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_type_identifier"
+          "name": "_function_identifier"
         },
         {
           "type": "STRING",
@@ -1525,7 +1525,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "parameter"
+            "name": "function_parameter"
           }
         },
         {
@@ -1598,7 +1598,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "return_type"
+            "name": "exception_param"
           }
         },
         {
@@ -2403,6 +2403,15 @@
       "named": true,
       "value": "enum_member"
     },
+    "_exception_identifier": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "exception_identifier"
+    },
     "_field_identifier": {
       "type": "ALIAS",
       "content": {
@@ -2411,6 +2420,15 @@
       },
       "named": true,
       "value": "field_identifier"
+    },
+    "_function_identifier": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "function_identifier"
     },
     "_param_identifier": {
       "type": "ALIAS",
@@ -2421,14 +2439,14 @@
       "named": true,
       "value": "param_identifier"
     },
-    "_return_type_identifier": {
+    "_exception_param_identifier": {
       "type": "ALIAS",
       "content": {
         "type": "SYMBOL",
         "name": "identifier"
       },
       "named": true,
-      "value": "return_type_identifier"
+      "value": "exception_param_identifier"
     },
     "_type_identifier": {
       "type": "ALIAS",
@@ -2947,9 +2965,11 @@
     "_const_identifier",
     "_enum_identifier",
     "_enum_member",
+    "_exception_identifier",
     "_field_identifier",
+    "_function_identifier",
     "_param_identifier",
-    "_return_type_identifier",
+    "_exception_param_identifier",
     "_type_identifier",
     "ReferenceError"
   ],

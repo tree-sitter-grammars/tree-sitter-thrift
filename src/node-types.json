@@ -366,11 +366,77 @@
           "named": true
         },
         {
-          "type": "field",
+          "type": "exception_identifier",
           "named": true
         },
         {
-          "type": "type_identifier",
+          "type": "field",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exception_param",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "exception_param_identifier",
+          "named": true
+        },
+        {
+          "type": "exception_param_type",
+          "named": true
+        },
+        {
+          "type": "field_id",
+          "named": true
+        },
+        {
+          "type": "field_modifier",
+          "named": true
+        },
+        {
+          "type": "list_separator",
+          "named": true
+        },
+        {
+          "type": "xsd_attrs",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exception_param_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "container_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
           "named": true
         }
       ]
@@ -475,6 +541,14 @@
           "named": true
         },
         {
+          "type": "function_identifier",
+          "named": true
+        },
+        {
+          "type": "function_parameter",
+          "named": true
+        },
+        {
           "type": "function_type",
           "named": true
         },
@@ -483,15 +557,50 @@
           "named": true
         },
         {
-          "type": "parameter",
-          "named": true
-        },
-        {
           "type": "throws",
           "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
         },
         {
-          "type": "type_identifier",
+          "type": "const_value",
+          "named": true
+        },
+        {
+          "type": "field_id",
+          "named": true
+        },
+        {
+          "type": "field_modifier",
+          "named": true
+        },
+        {
+          "type": "list_separator",
+          "named": true
+        },
+        {
+          "type": "param_identifier",
+          "named": true
+        },
+        {
+          "type": "param_type",
+          "named": true
+        },
+        {
+          "type": "xsd_attrs",
           "named": true
         }
       ]
@@ -689,49 +798,6 @@
     }
   },
   {
-    "type": "parameter",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "const_value",
-          "named": true
-        },
-        {
-          "type": "field_id",
-          "named": true
-        },
-        {
-          "type": "field_modifier",
-          "named": true
-        },
-        {
-          "type": "list_separator",
-          "named": true
-        },
-        {
-          "type": "param_identifier",
-          "named": true
-        },
-        {
-          "type": "param_type",
-          "named": true
-        },
-        {
-          "type": "xsd_attrs",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "primitive_type",
     "named": true,
     "fields": {}
@@ -758,61 +824,6 @@
         },
         {
           "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "return_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "const_value",
-          "named": true
-        },
-        {
-          "type": "container_type",
-          "named": true
-        },
-        {
-          "type": "field_id",
-          "named": true
-        },
-        {
-          "type": "field_modifier",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "list_separator",
-          "named": true
-        },
-        {
-          "type": "primitive_type",
-          "named": true
-        },
-        {
-          "type": "return_type",
-          "named": true
-        },
-        {
-          "type": "return_type_identifier",
-          "named": true
-        },
-        {
-          "type": "xsd_attrs",
           "named": true
         }
       ]
@@ -923,7 +934,7 @@
       "required": false,
       "types": [
         {
-          "type": "return_type",
+          "type": "exception_param",
           "named": true
         }
       ]
@@ -1268,11 +1279,11 @@
   },
   {
     "type": "double",
-    "named": true
+    "named": false
   },
   {
     "type": "double",
-    "named": false
+    "named": true
   },
   {
     "type": "dynamic",
@@ -1351,6 +1362,14 @@
     "named": false
   },
   {
+    "type": "exception_identifier",
+    "named": true
+  },
+  {
+    "type": "exception_param_identifier",
+    "named": true
+  },
+  {
     "type": "exec",
     "named": false
   },
@@ -1389,6 +1408,10 @@
   {
     "type": "function",
     "named": false
+  },
+  {
+    "type": "function_identifier",
+    "named": true
   },
   {
     "type": "global",
@@ -1661,10 +1684,6 @@
   {
     "type": "return",
     "named": false
-  },
-  {
-    "type": "return_type_identifier",
-    "named": true
   },
   {
     "type": "rs",

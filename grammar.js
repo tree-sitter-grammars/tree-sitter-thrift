@@ -9,6 +9,7 @@
 * @param {string?} trailing_separator - The trailing separator to use.
 *
 * @return {_}
+*
 */
 const list_seq = (rule, separator, trailing_separator = false) =>
   trailing_separator ?
@@ -191,9 +192,11 @@ module.exports = grammar({
     $._const_identifier,
     $._enum_identifier,
     $._enum_member,
+    $._exception_identifier,
     $._field_identifier,
+    $._function_identifier,
     $._param_identifier,
-    $._return_type_identifier,
+    $._exception_param_identifier,
     $._type_identifier,
 
     $._return_type,
@@ -288,7 +291,7 @@ module.exports = grammar({
         '}',
       ),
 
-    exception: ($) => seq('exception', $._type_identifier, '{', repeat($.field), '}', optional($.annotation)),
+    exception: ($) => seq('exception', $._exception_identifier, '{', repeat($.field), '}', optional($.annotation)),
 
     service: ($) =>
       seq(
@@ -315,7 +318,7 @@ module.exports = grammar({
         optional($.list_separator),
       ),
 
-    parameter: ($) => seq(
+    function_parameter: ($) => seq(
       optional($.field_id),
       optional($.field_modifier),
       alias($.field_type, $.param_type),
@@ -328,11 +331,11 @@ module.exports = grammar({
       optional($.list_separator),
     ),
 
-    return_type: ($) => seq(
+    exception_param: ($) => seq(
       optional($.field_id),
       optional($.field_modifier),
-      alias($.field_type, $.return_type),
-      $._return_type_identifier,
+      alias($.field_type, $.exception_param_type),
+      $._exception_param_identifier,
       optional(seq('=', $.const_value)),
       optional('xsd_optional'),
       optional('xsd_nillable'),
@@ -360,9 +363,9 @@ module.exports = grammar({
       seq(
         optional(choice('oneway', 'async')), // async is deprecated
         $.function_type,
-        $._type_identifier,
+        $._function_identifier,
         '(',
-        repeat($.parameter),
+        repeat($.function_parameter),
         ')',
         optional($.throws),
         optional($.annotation),
@@ -371,7 +374,7 @@ module.exports = grammar({
 
     function_type: ($) => choice($.field_type, 'void'),
 
-    throws: ($) => seq('throws', '(', repeat($.return_type), ')'),
+    throws: ($) => seq('throws', '(', repeat($.exception_param), ')'),
 
     field_type: ($) => choice($.identifier, $.primitive_type, $.container_type),
 
@@ -485,9 +488,11 @@ module.exports = grammar({
     _const_identifier: ($) => alias($.identifier, $.const_identifier),
     _enum_identifier: ($) => alias($.identifier, $.enum_identifier),
     _enum_member: ($) => alias($.identifier, $.enum_member),
+    _exception_identifier: ($) => alias($.identifier, $.exception_identifier),
     _field_identifier: ($) => alias($.identifier, $.field_identifier),
+    _function_identifier: ($) => alias($.identifier, $.function_identifier),
     _param_identifier: ($) => alias($.identifier, $.param_identifier),
-    _return_type_identifier: ($) => alias($.identifier, $.return_type_identifier),
+    _exception_param_identifier: ($) => alias($.identifier, $.exception_param_identifier),
     _type_identifier: ($) => alias($.identifier, $.type_identifier),
 
     st_identifier: () => /[A-Za-z_][A-Za-z0-9._-]*/,
