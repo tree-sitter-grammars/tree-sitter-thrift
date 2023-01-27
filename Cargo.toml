@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-thrift"
-description = "thrift grammar for the tree-sitter parsing library"
-version = "0.1.0"
+description = "Thrift grammar for the tree-sitter parsing library"
+version = "0.2.0"
 authors = [
 	"duskmoon (Campbell He) <kp.campbell.he@duskmoon314.com>",
 	"amaanq (Amaan Qureshi) <amaanq12@gmail.com>",
@@ -19,7 +19,7 @@ include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "0.20"
+tree-sitter = "~0.20"
 
 [build-dependencies]
-cc = "1.0"
+cc = "~1.0"

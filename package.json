@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-thrift",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "bindings/node",
   "keywords": [
     "parser",
@@ -11,7 +11,7 @@
     "amaanq (Amaan Qureshi) <amaanq12@gmail.com>"
   ],
   "license": "MIT",
-  "description": "thrift grammar for tree-sitter",
+  "description": "Thrift grammar for tree-sitter",
   "repository": {
     "type": "git",
     "url": "https://github.com/duskmoon314/tree-sitter-thrift.git"
