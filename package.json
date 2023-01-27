@@ -7,6 +7,9 @@
     "lexer"
   ],
   "author": "duskmoon (Campbell He)",
+  "contributors": [
+    "amaanq (Amaan Qureshi) <amaanq12@gmail.com>"
+  ],
   "license": "MIT",
   "description": "thrift grammar for tree-sitter",
   "repository": {
