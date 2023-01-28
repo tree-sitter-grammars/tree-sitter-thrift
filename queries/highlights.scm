@@ -10,15 +10,18 @@
 ] @include
 
 (include_path) @string
+(package_path) @string
 
 ; Types
 
-(primitive_type) @type.builtin
+(primitive) @type.builtin
 
 [
   "list"
   "map"
   "set"
+  "sink"
+  "stream"
   "void"
 ] @type.builtin
 
@@ -57,6 +60,9 @@
 ; Attributes
 
 (annotation_identifier) @attribute
+(exception_modifier) @attribute
+(field_modifier) @attribute
+(function_modifier) @attribute
 (uri_def) @attribute
 
 ; Operators
@@ -81,6 +87,7 @@
   "exception"
   "extends"
   "include"
+  "interaction"
   "namespace"
   "oneway"
   "optional"
@@ -96,7 +103,6 @@
 
 [
   "async"
-  "byte"
   "cocoa_prefix"
   "cpp_namespace"
   "csharp_namespace"
@@ -115,10 +121,28 @@
   "xsd_optional"
 ] @keyword
 
+; Extended Kewords
+[
+  "client"
+  "idempotent"
+  "package"
+  "performs"
+  "permanent"
+  "readonly"
+  "server"
+  "safe"
+  "stateful"
+  "transient"
+] @keyword
 
 ; Literals
 
-(string_literal) @string
+[
+ (annotation_value)
+ (string)
+] @string
+
+(escape_sequence) @string.escape
 
 (uri) @string.special
 
@@ -141,9 +165,8 @@
 [
   "*"
   "&"
+  "@"
 ] @punctuation.special
-
-(field_modifier) @attribute
 
 ["{" "}"] @punctuation.bracket
 

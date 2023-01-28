@@ -1,14 +1,17 @@
 /* eslint-disable camelcase */
+/* eslint-disable-next-line spaced-comment */
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
 
 /**
 * Creates a rule to match one or more of the rules separated by the separator
 * and optionally adds a trailing separator (default is false).
 *
-* @param {_} rule
+* @param {Rule} rule
 * @param {string} separator - The separator to use.
-* @param {string?} trailing_separator - The trailing separator to use.
+* @param {boolean?} trailing_separator - The trailing separator to use.
 *
-* @return {_}
+* @return {SeqRule}
 *
 */
 const list_seq = (rule, separator, trailing_separator = false) =>
@@ -74,6 +77,22 @@ const namespace_languages = [
   'xsd_namespace',
 ];
 
+// Facebook/Twitter uses these
+const namespace_languages_ext = [
+  'android',
+  'hack',
+  'hs',
+  'hs2',
+  'java.swift',
+  'java.swift.constants',
+  'json',
+  'py.asyncio',
+  'py3',
+  'rust',
+  'scala',
+];
+
+// Commented invalids are ones to have been found used by fbthrift, and so have been removed
 const invalid = [
   'BEGIN',
   'END',
@@ -99,7 +118,7 @@ const invalid = [
   'continue',
   'declare',
   'def',
-  'default',
+  // 'default',
   'del',
   'delete',
   'do',
@@ -119,10 +138,10 @@ const invalid = [
   'except',
   'exec',
   'finally',
-  'float',
+  // 'float',
   'for',
   'foreach',
-  'from',
+  // 'from',
   'function',
   'global',
   'goto',
@@ -135,14 +154,14 @@ const invalid = [
   'interface',
   'is',
   'lambda',
-  'module',
+  // 'module',
   'native',
   'new',
-  'next',
-  'nil',
+  // 'next',
+  // 'nil',
   'not',
   'or',
-  'package',
+  // 'package',
   'pass',
   'print',
   'private',
@@ -153,11 +172,11 @@ const invalid = [
   'rescue',
   'retry',
   'register',
-  'return',
+  // 'return',
   'self',
   'sizeof',
   'static',
-  'super',
+  // 'super',
   'switch',
   'synchronized',
   'then',
@@ -205,19 +224,33 @@ module.exports = grammar({
   rules: {
     document: ($) => seq(repeat($.header), repeat($.definition)),
 
-    header: ($) => choice($.include, $.cpp_include, $.namespace),
+    header: ($) => choice($.include, $.cpp_include, $.namespace, $.package),
 
-    include: ($) => seq('include', $.include_path),
+    include: ($) => seq('include', alias($.string, $.include_path)),
 
-    cpp_include: ($) => seq('cpp_include', $.include_path),
+    cpp_include: ($) => seq('cpp_include', alias($.string, $.include_path)),
 
-    namespace: ($) => seq('namespace', $.namespace_scope, alias($.identifier, $.namespace_definition), optional($.namespace_uri)),
+    package: ($) => seq(
+      repeat($.fb_annotation),
+      'package',
+      alias($.string, $.package_path),
+    ),
 
-    namespace_scope: () => choice('*', ...namespace_languages),
+    namespace: ($) =>
+      seq(
+        'namespace',
+        // choice($.namespace_scope, alias($.identifier, $.namespace_scope)),
+        $.namespace_scope,
+        alias(choice($.identifier, $.string), $.namespace_definition),
+        optional($.namespace_uri),
+        optional(';'),
+      ),
+
+    namespace_scope: () => choice('*', ...namespace_languages, ...namespace_languages_ext),
 
     annotation_scope: () => choice(...namespace_languages),
 
-    namespace_uri: ($) => seq('(', alias('uri', $.uri_def), '=', alias($.string_literal, $.uri), ')'),
+    namespace_uri: ($) => seq('(', alias('uri', $.uri_def), '=', alias($.string, $.uri), ')'),
 
     definition: ($) =>
       choice(
@@ -229,10 +262,23 @@ module.exports = grammar({
         $.union,
         $.exception,
         $.service,
+        $.interaction,
+      ),
+
+    typedef: ($) =>
+      seq(
+        repeat($.fb_annotation),
+        'typedef',
+        $.definition_type,
+        optional($.annotation),
+        alias($.identifier, $.typedef_definition),
+        optional($.annotation),
+        optional($.list_separator),
       ),
 
     const: ($) =>
       seq(
+        repeat($.fb_annotation),
         'const',
         $.field_type,
         $._const_identifier,
@@ -242,15 +288,15 @@ module.exports = grammar({
         optional($.list_separator),
       ),
 
-    typedef: ($) => seq('typedef', $.definition_type, optional($.annotation), alias($.identifier, $.typedef_definition), optional($.annotation), optional($.list_separator)),
-
     enum: ($) =>
       seq(
+        repeat($.fb_annotation),
         'enum',
         $._enum_identifier,
         '{',
         repeat(
           seq(
+            repeat($.fb_annotation),
             $._enum_member,
             optional(seq('=', $.number)),
             optional($.annotation),
@@ -266,12 +312,13 @@ module.exports = grammar({
         'senum',
         $._type_identifier,
         '{',
-        repeat(seq($.string_literal, optional($.list_separator))),
+        repeat(seq($.string, optional($.list_separator))),
         '}',
       ),
 
     struct: ($) =>
       seq(
+        repeat($.fb_annotation),
         'struct',
         $._type_identifier,
         optional('xsd_all'),
@@ -283,21 +330,47 @@ module.exports = grammar({
 
     union: ($) =>
       seq(
+        repeat($.fb_annotation),
         'union',
         $._type_identifier,
         optional('xsd_all'),
         '{',
         repeat($.field),
         '}',
+        optional($.annotation),
       ),
 
-    exception: ($) => seq('exception', $._exception_identifier, '{', repeat($.field), '}', optional($.annotation)),
+    exception: ($) =>
+      seq(
+        repeat($.fb_annotation),
+        repeat($.exception_modifier),
+        'exception',
+        $._exception_identifier,
+        '{',
+        repeat($.field),
+        '}',
+        optional($.annotation),
+      ),
+    exception_modifier: () => choice('client', 'permanent', 'server', 'safe', 'stateful', 'transient'),
 
     service: ($) =>
       seq(
+        repeat($.fb_annotation),
         'service',
         $._type_identifier,
         optional(seq('extends', $._type_identifier)),
+        '{',
+        // repeat(seq('performs', $._type_identifier, ';')),
+        repeat(choice(seq('performs', $._type_identifier, ';'), $.function)),
+        '}',
+        optional($.annotation),
+      ),
+
+    // Facebook-specific
+    interaction: ($) =>
+      seq(
+        'interaction',
+        $._type_identifier,
         '{',
         repeat($.function),
         '}',
@@ -306,9 +379,11 @@ module.exports = grammar({
 
     field: ($) =>
       seq(
+        repeat($.fb_annotation),
         optional($.field_id),
         optional($.field_modifier),
         $.field_type,
+        optional($.annotation),
         $._field_identifier,
         optional(seq('=', $.const_value)),
         optional('xsd_optional'),
@@ -317,11 +392,41 @@ module.exports = grammar({
         optional($.annotation),
         optional($.list_separator),
       ),
+    recursive_field: ($) =>
+      seq(
+        optional($.field_id),
+        optional($.field_modifier),
+        $.field_type,
+        '&',
+        $.identifier,
+      ),
+    field_id: ($) => seq($.number, ':'),
+    field_modifier: () => choice('required', 'optional'),
 
+    xsd_attrs: ($) => seq('xsd_attrs', '{', repeat($.field), '}'),
+
+    // Functions
+    function: ($) =>
+      seq(
+        repeat($.fb_annotation),
+        optional($.function_modifier),
+        list_seq($.return_type, ','),
+        optional($.annotation),
+        $._function_identifier,
+        $.function_parameters,
+        optional($.throws),
+        optional($.annotation),
+        optional($.list_separator),
+      ),
+    function_modifier: () => choice('async', 'oneway', 'readonly', 'idempotent'), // async is deprecated
+    return_type: ($) => choice($.field_type, 'void'),
+    function_parameters: ($) => seq('(', repeat($.function_parameter), ')'),
     function_parameter: ($) => seq(
+      repeat($.fb_annotation),
       optional($.field_id),
       optional($.field_modifier),
       alias($.field_type, $.param_type),
+      optional($.annotation),
       $._param_identifier,
       optional(seq('=', $.const_value)),
       optional('xsd_optional'),
@@ -330,8 +435,10 @@ module.exports = grammar({
       optional($.annotation),
       optional($.list_separator),
     ),
-    function_parameters: ($) => seq('(', repeat($.function_parameter), ')'),
 
+    // Exceptions
+    throws: ($) => seq('throws', $.exception_parameters),
+    exception_parameters: ($) => seq('(', repeat($.exception_parameter), ')'),
     exception_parameter: ($) => seq(
       optional($.field_id),
       optional($.field_modifier),
@@ -344,47 +451,26 @@ module.exports = grammar({
       optional($.annotation),
       optional($.list_separator),
     ),
-    exception_parameters: ($) => seq('(', repeat($.exception_parameter), ')'),
 
-    recursive_field: ($) =>
+    field_type: ($) => choice($.identifier, $.primitive, $.container_type),
+
+    definition_type: ($) => choice($.primitive, $.container_type, $.custom_type),
+
+    primitive: () => choice(...primitives),
+
+    container_type: ($) => choice($.list, $.map, $.set, $.stream, $.sink),
+    list: ($) => prec.left(
       seq(
-        optional($.field_id),
-        optional($.field_modifier),
+        'list',
+        '<',
         $.field_type,
-        '&',
-        $.identifier,
-      ),
-
-    field_id: ($) => seq($.number, ':'),
-
-    field_modifier: () => choice('required', 'optional'),
-
-    xsd_attrs: ($) => seq('xsd_attrs', '{', repeat($.field), '}'),
-
-    function: ($) =>
-      seq(
-        optional(choice('oneway', 'async')), // async is deprecated
-        $.function_type,
-        $._function_identifier,
-        $.function_parameters,
-        optional($.throws),
         optional($.annotation),
-        optional($.list_separator),
+        '>',
+        optional($.annotation),
+        optional($.cpp_type),
       ),
-
-    function_type: ($) => choice($.field_type, 'void'),
-
-    throws: ($) => seq('throws', $.exception_parameters),
-
-    field_type: ($) => choice($.identifier, $.primitive_type, $.container_type),
-
-    definition_type: ($) => choice($.primitive_type, $.container_type, $.custom_type),
-
-    primitive_type: () => choice(...primitives),
-
-    container_type: ($) => choice($.map_type, $.set_type, $.list_type),
-
-    map_type: ($) =>
+    ),
+    map: ($) => prec.left(
       seq(
         'map',
         optional($.cpp_type),
@@ -393,29 +479,103 @@ module.exports = grammar({
         optional($.annotation),
         ',',
         $.field_type,
+        optional($.annotation),
         '>',
+        optional($.annotation),
       ),
+    ),
+    set: ($) => prec.left(
+      seq(
+        'set',
+        optional($.cpp_type),
+        '<',
+        $.field_type,
+        optional($.annotation),
+        '>',
+        optional($.annotation),
+      ),
+    ),
+    stream: ($) => prec.left(
+      seq(
+        'stream',
+        '<',
+        $.field_type,
+        // optional($.annotation),
+        optional($.throws),
+        '>',
+        // optional($.annotation),
+      ),
+    ),
+    sink: ($) => prec.left(
+      seq(
+        'sink',
+        '<',
+        $.field_type,
+        optional($.annotation),
+        optional($.throws),
+        ',',
+        $.field_type,
+        optional($.annotation),
+        optional($.throws),
+        '>',
+        // optional($.annotation),
+      ),
+    ),
 
-    set_type: ($) => seq('set', optional($.cpp_type), '<', $.field_type, optional($.annotation), '>'),
 
-    list_type: ($) => seq('list', '<', $.field_type, optional($.annotation), '>', optional($.cpp_type)),
-
-    cpp_type: ($) => choice('cpp_type', $.string_literal),
+    cpp_type: ($) => choice('cpp_type', $.string),
 
     annotation: ($) =>
       seq(
         '(',
-        list_seq(
-          seq(choice($.annotation_definition), optional(seq('=', alias($.string_literal, $.annotation_value)))),
-          ',',
-          true),
+        optional(
+          list_seq(
+            seq($.annotation_definition, optional(seq('=', alias($.const_value, $.annotation_value)))),
+            ',',
+            true,
+          ),
+        ),
         ')',
       ),
+    // @scope.Field
+    // @cpp.Ref{type = cpp.RefType.Unique}
+    fb_annotation: ($) => seq('@', $.fb_annotation_definition),
 
     annotation_definition: ($) =>
       seq(
         $._annotation_identifier,
         repeat(seq('.', $._field_identifier)),
+      ),
+    // @python.Adapter{
+    //   name = "my.module.Adapter2",
+    //   typeHint = "my.another.module.AdaptedType2[]",
+    // }
+    fb_annotation_definition: ($) =>
+      seq(
+        $._annotation_identifier,
+        choice(
+          repeat(seq('.', $._field_identifier)),
+          seq(
+            '{',
+            // list_seq(
+            //   seq(
+            //     $._field_identifier,
+            //     '=',
+            //     choice($._enum_identifier, $.string),
+            //   ),
+            //   ',',
+            //   true,
+            // ),
+            repeat(
+              seq(
+                $._field_identifier,
+                '=',
+                $.const_value,
+                optional(','),
+              )),
+            '}',
+          ),
+        ),
       ),
 
     custom_type: ($) => $.identifier,
@@ -425,20 +585,22 @@ module.exports = grammar({
         $.number,
         $.double,
         $.boolean,
-        $.string_literal,
+        $.string,
         $._internal_const_identifier,
         $.const_list,
         $.const_map,
+        $.const_struct,
       ),
-    // const_maybe_accessor: ($) => seq(alias($._identifier_no_period, $.identifier), repeat(seq('.', $._enum_member))),
-    _internal_const_identifier: ($) => choice(
-      seq(
-      // Foo.Bar.Etc...
-        repeat1(seq(alias($._identifier_no_period, $.type_identifier), '.')),
-        // ... Baz
+    _internal_const_identifier: ($) => prec.right(
+      choice(
+        seq(
+          // Foo.Bar.Etc...
+          repeat1(seq(alias($._identifier_no_period, $.type_identifier), '.')),
+          // ... Baz
+          alias($._identifier_no_period, $.const_identifier),
+        ),
         alias($._identifier_no_period, $.const_identifier),
       ),
-      alias($._identifier_no_period, $.const_identifier),
     ),
 
     numeric_operator: () => choice('+', '-'),
@@ -446,8 +608,14 @@ module.exports = grammar({
     number: () => {
       const hex_literal = seq(
         optional(choice('-', '+')),
-        '0x', // Hex (lower case x only in thrift)
+        /0[xX]/,
         /[\da-fA-F](_?[\da-fA-F])*/,
+      );
+
+      const binary_literal = seq(
+        optional(choice('-', '+')),
+        /0[bB]/,
+        /[01](_?[01])*/,
       );
 
       const decimal_digits = /\d(_?\d)*/;
@@ -466,6 +634,7 @@ module.exports = grammar({
 
       return token(choice(
         hex_literal,
+        binary_literal,
         decimal_literal,
       ));
     },
@@ -486,9 +655,68 @@ module.exports = grammar({
         '}',
       ),
 
-    string_literal: () => /"([^"\\]|\\.)*"|'([^'\\]|\\.)*'/,
+    const_struct: ($) =>
+      seq(
+        alias(
+          choice(
+            seq(
+            // Foo.Bar.Etc...
+              repeat1(seq(alias($._identifier_no_period, $.type_identifier), '.')),
+              // ... Baz
+              alias($._identifier_no_period, $.type_identifier),
+            ),
+            alias($._identifier_no_period, $.type_identifier),
+          ),
+          $.type_identifier,
+        ),
+        '{',
+        repeat(seq($._field_identifier, '=', $.const_value, optional(','))),
+        '}',
+      ),
 
-    include_path: ($) => $.string_literal,
+    // https://github.com/tree-sitter/tree-sitter-javascript/blob/master/grammar.js#L900-L945
+    // Here we tolerate unescaped newlines in double-quoted and
+    // single-quoted string literals.
+    //
+    string: ($) => choice(
+      seq(
+        '"',
+        repeat(choice(
+          alias($.unescaped_double_string_fragment, $.string_fragment),
+          $.escape_sequence,
+        )),
+        '"',
+      ),
+      seq(
+        '\'',
+        repeat(choice(
+          alias($.unescaped_single_string_fragment, $.string_fragment),
+          $.escape_sequence,
+        )),
+        '\'',
+      ),
+    ),
+
+    // Workaround to https://github.com/tree-sitter/tree-sitter/issues/1156
+    // We give names to the token() constructs containing a regexp
+    // so as to obtain a node in the CST.
+    //
+    unescaped_double_string_fragment: () => token.immediate(prec(1, /[^"\\]+/)),
+
+    // same here
+    unescaped_single_string_fragment: () => token.immediate(prec(1, /[^'\\]+/)),
+
+    escape_sequence: () => token.immediate(seq(
+      '\\',
+      choice(
+        // /[^xu0-7]/,
+        /[abfnrtv'\"\\?]/,
+        /[0-7]{1,3}/,
+        /x[0-9a-fA-F]{2}/,
+        /u[0-9a-fA-F]{4}/,
+        /u{[0-9a-fA-F]+}/,
+      ),
+    )),
 
     identifier: () => /[A-Za-z_][A-Za-z0-9._]*/,
     _identifier_no_period: () => /[A-Za-z_][A-Za-z0-9_]*/,
