@@ -1,11 +1,11 @@
-; Namespace
+ ; Namespace
 
 (namespace_definition) @namespace
 
 ; Includes
 
-[
   "include"
+[
   "cpp_include"
 ] @include
 
@@ -60,9 +60,6 @@
 ; Attributes
 
 (annotation_identifier) @attribute
-(exception_modifier) @attribute
-(field_modifier) @attribute
-(function_modifier) @attribute
 (uri_def) @attribute
 
 ; Operators
@@ -153,14 +150,20 @@
 (boolean) @boolean
 
 ; Typedefs
+
 (typedef_definition) @type.definition
 (namespace_scope) @type.definition
 
-; Misc
+; Qualifiers
 
 [
   "const"
+  (exception_modifier)
+  (field_modifier)
+  (function_modifier)
 ] @type.qualifier
+
+; Punctuation
 
 [
   "*"
