@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+function checkout() {
+  repo=$1; url=$2; sha=$3
+
+  if [ ! -d "$repo" ]; then
+    git clone "https://github.com/$url" "$repo"
+  fi
+
+  pushd "$repo"
+  git fetch && git reset --hard "$sha"
+  popd
+}
+
+checkout examples/thrift apache/thrift f223bd3b54d04c21289d806c7f51b115757703e7
+checkout examples/fbthrift facebook/fbthrift eb94c737bc4b0624aac8a91f7a2d2833ef9b1c90
+checkout examples/scrooge twitter/scrooge 39542d5bcd0d35a6957cb0c8ab2a2dc8d3180636
+checkout examples/armeria line/armeria 9e7d453d58f90fe7340b327a7cef684a4ea92afe
+checkout examples/pilota cloudwego/pilota 0ad25f1a9420cc68e4546c4cf7a0fb2f8158858c
+checkout examples/jaeger jaegertracing/jaeger-idl 05fe64e9c305526901f70ff692030b388787e388
+checkout examples/herringbone stripe-archive/herringbone 4f0524287ef47fc897702d654572bbeee1004879
+
+known_failures="$(cat script/known_failures.txt)"
+
+# Remove directories testing invalid keywords or intended fails
+find examples -type d \( -name keyword-samples -o -name explicit_module -o -name fail -o -name py-reserved \) -exec rm -rf {} +
+# Remove files testing invalid keywords or intended fails
+find examples -type f \( -name PythonReservedKeywords.thrift \) -exec rm -rf {} +
+
+tree-sitter parse -q \
+  'examples/**/*.thrift' \
+  "$(for file in $known_failures; do echo "!${file}"; done)"
+
+example_count=$(find examples -name '*.thrift' | wc -l)
+failure_count=$(wc -w <<< "$known_failures")
+success_count=$(( example_count - failure_count ))
+success_percent=$(bc -l <<< "100*${success_count}/${example_count}")
+
+printf \
+  "Successfully parsed %d of %d example files (%.1f%%)\n" \
+  $success_count "$example_count" "$success_percent"
