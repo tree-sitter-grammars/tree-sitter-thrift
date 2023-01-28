@@ -179,7 +179,7 @@ service Calculator extends shared.SharedService {
       (header
         (include
           (include_path
-            (string_literal))))
+            (string_fragment))))
       (comment)
       (header
         (namespace
@@ -217,13 +217,13 @@ service Calculator extends shared.SharedService {
       (definition
         (typedef
           (definition_type
-            (primitive_type))
+            (primitive))
           (typedef_definition)))
       (comment)
       (definition
         (const
           (field_type
-            (primitive_type))
+            (primitive))
           (const_identifier)
           (const_value
             (number))))
@@ -231,23 +231,27 @@ service Calculator extends shared.SharedService {
         (const
           (field_type
             (container_type
-              (map_type
+              (map
                 (field_type
-                  (primitive_type))
+                  (primitive))
                 (field_type
-                  (primitive_type)))))
+                  (primitive)))))
           (const_identifier)
           (const_value
             (const_map
               (const_value
-                (string_literal))
+                (string
+                  (string_fragment)))
               (const_value
-                (string_literal))
+                (string
+                  (string_fragment)))
               (list_separator)
               (const_value
-                (string_literal))
+                (string
+                  (string_fragment)))
               (const_value
-                (string_literal))))))
+                (string
+                  (string_fragment)))))))
       (comment)
       (definition
         (enum
@@ -271,7 +275,7 @@ service Calculator extends shared.SharedService {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (const_value
               (number))
@@ -280,7 +284,7 @@ service Calculator extends shared.SharedService {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (field
@@ -295,7 +299,7 @@ service Calculator extends shared.SharedService {
               (number))
             (field_modifier)
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))))
       (comment)
@@ -306,14 +310,14 @@ service Calculator extends shared.SharedService {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier))))
       (comment)
       (definition
@@ -322,41 +326,41 @@ service Calculator extends shared.SharedService {
           (type_identifier)
           (comment)
           (function
-            (function_type)
+            (return_type)
             (function_identifier)
             (function_parameters)
             (list_separator))
           (function
-            (function_type
+            (return_type
               (field_type
-                (primitive_type)))
+                (primitive)))
             (function_identifier)
             (function_parameters
               (function_parameter
                 (field_id
                   (number))
                 (param_type
-                  (primitive_type))
+                  (primitive))
                 (param_identifier)
                 (list_separator))
               (function_parameter
                 (field_id
                   (number))
                 (param_type
-                  (primitive_type))
+                  (primitive))
                 (param_identifier)))
             (list_separator))
           (function
-            (function_type
+            (return_type
               (field_type
-                (primitive_type)))
+                (primitive)))
             (function_identifier)
             (function_parameters
               (function_parameter
                 (field_id
                   (number))
                 (param_type
-                  (primitive_type))
+                  (primitive))
                 (param_identifier)
                 (list_separator))
               (function_parameter
@@ -376,7 +380,8 @@ service Calculator extends shared.SharedService {
             (list_separator))
           (comment)
           (function
-            (function_type)
+			(function_modifier)
+            (return_type)
             (function_identifier)
             (function_parameters))))
       (comment))

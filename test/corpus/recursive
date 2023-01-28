@@ -43,7 +43,7 @@ struct RecList {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)))))
 
 

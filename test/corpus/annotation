@@ -27,20 +27,21 @@ typedef list<i32> ( cpp.template = "std::list" ) int_linked_list
 
 ---
 
-(document
+ (document
       (definition
         (typedef
           (definition_type
             (container_type
-              (list_type
+              (list
                 (field_type
-                  (primitive_type)))))
+                  (primitive)))))
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value))
+            (annotation_value
+              (string
+                (string_fragment))))
           (typedef_definition))))
-
 
 
 ======================================
@@ -61,12 +62,14 @@ struct foo {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string
+                  (string_fragment))))
             (list_separator)))))
 
 
@@ -84,7 +87,7 @@ struct foo {
 
 ---
 
-(document
+ (document
       (definition
         (struct
           (type_identifier)
@@ -92,39 +95,44 @@ struct foo {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string
+                  (string_fragment))))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value)
+              (annotation_value
+                (string
+                  (string_fragment)))
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string)))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator)))))
 
@@ -143,7 +151,7 @@ struct foo {
 
 ---
 
-(document
+ (document
       (definition
         (struct
           (type_identifier)
@@ -151,45 +159,52 @@ struct foo {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string
+                  (string_fragment))))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value)
+              (annotation_value
+                (string
+                  (string_fragment)))
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string)))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)))))
+            (annotation_value
+              (string
+                (string_fragment)))))))
 
 
 
@@ -218,51 +233,61 @@ struct foo {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string
+                  (string_fragment))))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value)
+              (annotation_value
+                (string
+                  (string_fragment)))
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string)))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)
+            (annotation_value
+              (string
+                (string_fragment)))
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)
+            (annotation_value
+              (string
+                (string_fragment)))
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)))))
+            (annotation_value
+              (string))))))
 
 
 
@@ -292,51 +317,61 @@ struct foo {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string
+                  (string_fragment))))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value)
+              (annotation_value
+                (string
+                  (string_fragment)))
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string)))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)
+            (annotation_value
+              (string
+                (string_fragment)))
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)
+            (annotation_value
+              (string
+                (string_fragment)))
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)
+            (annotation_value
+              (string))
             (annotation_definition
               (annotation_identifier))))))
 
@@ -354,16 +389,20 @@ typedef string ( unicode.encoding = "UTF-16" ) non_latin_string (foo="bar")
       (definition
         (typedef
           (definition_type
-            (primitive_type))
+            (primitive))
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value))
+            (annotation_value
+              (string
+                (string_fragment))))
           (typedef_definition)
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)))))
+            (annotation_value
+              (string
+                (string_fragment)))))))
 
 
 
@@ -380,13 +419,15 @@ typedef list< double ( cpp.fixed_point = "16" ) > tiny_float_list
         (typedef
           (definition_type
             (container_type
-              (list_type
+              (list
                 (field_type
-                  (primitive_type))
+                  (primitive))
                 (annotation
                   (annotation_definition
                     (annotation_identifier))
-                  (annotation_value)))))
+                  (annotation_value
+                    (string
+                      (string_fragment)))))))
           (typedef_definition))))
 
 
@@ -415,7 +456,9 @@ enum weekdays {
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value))
+            (annotation_value
+              (string
+                (string_fragment))))
           (list_separator)
           (enum_member)
           (list_separator)
@@ -431,7 +474,9 @@ enum weekdays {
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)))))
+            (annotation_value
+              (string
+                (string_fragment)))))))
 
 
 
@@ -459,7 +504,9 @@ enum weekdays {
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value))
+            (annotation_value
+              (string
+                (string_fragment))))
           (list_separator)
           (enum_member)
           (list_separator)
@@ -475,11 +522,15 @@ enum weekdays {
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value))
+            (annotation_value
+              (string
+                (string_fragment))))
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)))))
+            (annotation_value
+              (string
+                (string_fragment)))))))
 
 
 
@@ -498,13 +549,15 @@ service foo_service {
         (service
           (type_identifier)
           (function
-            (function_type)
+            (return_type)
             (function_identifier)
 			(function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))))))
+              (annotation_value
+                (string
+                  (string_fragment))))))))   
 
 
 
@@ -523,17 +576,21 @@ service foo_service {
         (service
           (type_identifier)
           (function
-            (function_type)
+            (return_type)
             (function_identifier)
-			(function_parameters)
+            (function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value)))
+              (annotation_value
+                (string
+                  (string_fragment)))))
           (annotation
             (annotation_definition
               (annotation_identifier))
-            (annotation_value)))))
+            (annotation_value
+              (string
+                (string_fragment)))))))
 
 
 
@@ -555,33 +612,44 @@ service deprecate_everything {
         (service
           (type_identifier)
           (function
-            (function_type)
+            (return_type)
             (function_identifier)
-			(function_parameters)
+            (function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value)))
+              (annotation_value
+                (string
+                  (string_fragment)
+                  (escape_sequence)
+                  (string_fragment)
+                  (escape_sequence)))))
           (function
-            (function_type)
+            (return_type)
             (function_identifier)
-			(function_parameters)
+            (function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value)))
+              (annotation_value
+                (string
+                  (string_fragment)))))
           (function
-            (function_type)
+            (return_type)
             (function_identifier)
-			(function_parameters)
+            (function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value)))
+              (annotation_value
+                (string
+                  (string_fragment)
+                  (escape_sequence)
+                  (string_fragment)))))
           (function
-            (function_type)
+            (return_type)
             (function_identifier)
-			(function_parameters)
+            (function_parameters)
             (annotation
               (annotation_definition
                 (annotation_identifier))))
@@ -623,68 +691,74 @@ struct OneOfEachBeansWithAnnotations {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
-            (field_identifier)
-            (annotation
-              (annotation_definition
-                (annotation_identifier))
-              (annotation_value))
-            (list_separator))
-          (field
-            (field_id
-              (number))
-            (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string
+                  (string_fragment))))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
-            (field_identifier)
-            (list_separator))
-          (field
-            (field_id
-              (number))
-            (field_type
-              (primitive_type))
-            (field_identifier)
-            (list_separator))
-          (field
-            (field_id
-              (number))
-            (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string
+                  (string_fragment))))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
+            (field_identifier)
+            (list_separator))
+          (field
+            (field_id
+              (number))
+            (field_type
+              (primitive))
+            (field_identifier)
+            (annotation
+              (annotation_definition
+                (annotation_identifier))
+              (annotation_value
+                (string
+                  (string_fragment))))
+            (list_separator))
+          (field
+            (field_id
+              (number))
+            (field_type
+              (primitive))
+            (field_identifier)
+            (list_separator))
+          (field
+            (field_id
+              (number))
+            (field_type
+              (primitive))
             (field_identifier)
             (list_separator))
           (field
@@ -692,23 +766,25 @@ struct OneOfEachBeansWithAnnotations {
               (number))
             (field_type
               (container_type
-                (list_type
+                (list
                   (field_type
-                    (primitive_type)))))
+                    (primitive)))))
             (field_identifier)
             (annotation
               (annotation_definition
                 (annotation_identifier))
-              (annotation_value))
+              (annotation_value
+                (string
+                  (string_fragment))))
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
               (container_type
-                (list_type
+                (list
                   (field_type
-                    (primitive_type)))))
+                    (primitive)))))
             (field_identifier)
             (list_separator))
           (field
@@ -716,7 +792,7 @@ struct OneOfEachBeansWithAnnotations {
               (number))
             (field_type
               (container_type
-                (list_type
+                (list
                   (field_type
-                    (primitive_type)))))
+                    (primitive)))))
             (field_identifier)))))

@@ -79,7 +79,7 @@ const set<GreekGodGoddessType> BEAUTY = [ GreekGodGoddess.APHRODITE, GreekGodGod
       (definition
         (typedef
           (definition_type
-            (primitive_type))
+            (primitive))
           (typedef_definition)))
       (definition
         (struct
@@ -90,7 +90,7 @@ const set<GreekGodGoddessType> BEAUTY = [ GreekGodGoddess.APHRODITE, GreekGodGod
             (field_modifier)
             (field_type
               (container_type
-                (map_type
+                (map
                   (field_type
                     (identifier))
                   (field_type
@@ -103,7 +103,7 @@ const set<GreekGodGoddessType> BEAUTY = [ GreekGodGoddess.APHRODITE, GreekGodGod
             (field_modifier)
             (field_type
               (container_type
-                (set_type
+                (set
                   (field_type
                     (identifier)))))
             (field_identifier)
@@ -114,9 +114,9 @@ const set<GreekGodGoddessType> BEAUTY = [ GreekGodGoddess.APHRODITE, GreekGodGod
             (field_modifier)
             (field_type
               (container_type
-                (map_type
+                (map
                   (field_type
-                    (primitive_type))
+                    (primitive))
                   (field_type
                     (identifier)))))
             (field_identifier)
@@ -127,20 +127,20 @@ const set<GreekGodGoddessType> BEAUTY = [ GreekGodGoddess.APHRODITE, GreekGodGod
             (field_modifier)
             (field_type
               (container_type
-                (set_type
+                (set
                   (field_type
-                    (primitive_type)))))
+                    (primitive)))))
             (field_identifier)
             (list_separator))))
       (definition
         (const
           (field_type
             (container_type
-              (map_type
+              (map
                 (field_type
                   (identifier))
                 (field_type
-                  (primitive_type)))))
+                  (primitive)))))
           (const_identifier)
           (const_value
             (const_map
@@ -148,19 +148,21 @@ const set<GreekGodGoddessType> BEAUTY = [ GreekGodGoddess.APHRODITE, GreekGodGod
                 (type_identifier)
                 (const_identifier))
               (const_value
-                (string_literal))
+                (string
+                  (string_fragment)))
               (list_separator)
               (const_value
                 (type_identifier)
                 (const_identifier))
               (const_value
-                (string_literal))
+                (string
+                  (string_fragment)))
               (list_separator)))))
       (definition
         (const
           (field_type
             (container_type
-              (set_type
+              (set
                 (field_type
                   (identifier)))))
           (const_identifier)

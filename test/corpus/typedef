@@ -48,7 +48,7 @@ typedef string MyString;
       (definition
         (typedef
           (definition_type
-            (primitive_type))
+            (primitive))
           (typedef_definition)
           (list_separator))))
 

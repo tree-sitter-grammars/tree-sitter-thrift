@@ -33,7 +33,7 @@ struct CrazyNesting {
 
 ---
 
- (document
+(document
       (definition
         (struct
           (type_identifier)
@@ -41,7 +41,7 @@ struct CrazyNesting {
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier)
             (list_separator))
           (field
@@ -50,7 +50,7 @@ struct CrazyNesting {
             (field_modifier)
             (field_type
               (container_type
-                (set_type
+                (set
                   (field_type
                     (identifier)))))
             (field_identifier)
@@ -62,56 +62,59 @@ struct CrazyNesting {
             (field_modifier)
             (field_type
               (container_type
-                (list_type
+                (list
                   (field_type
                     (container_type
-                      (map_type
+                      (map
                         (field_type
                           (container_type
-                            (set_type
+                            (set
                               (field_type
-                                (primitive_type)))))
+                                (primitive)))))
                         (annotation
                           (annotation_definition
                             (annotation_identifier))
-                          (annotation_value))
+                          (annotation_value
+                            (string)))
                         (field_type
                           (container_type
-                            (map_type
+                            (map
                               (field_type
-                                (primitive_type))
+                                (primitive))
                               (field_type
                                 (container_type
-                                  (set_type
+                                  (set
                                     (field_type
                                       (container_type
-                                        (list_type
+                                        (list
                                           (field_type
                                             (container_type
-                                              (map_type
+                                              (map
                                                 (field_type
                                                   (identifier))
                                                 (field_type
-                                                  (primitive_type)))))
+                                                  (primitive)))))
                                           (annotation
                                             (annotation_definition
                                               (annotation_identifier))
-                                            (annotation_value)))))
+                                            (annotation_value
+                                              (string))))))
                                     (annotation
                                       (annotation_definition
                                         (annotation_identifier))
-                                      (annotation_value))))))))))))))
+                                      (annotation_value
+                                        (string)))))))))))))))
             (field_identifier)
             (list_separator))
           (field
             (field_id
               (number))
             (field_type
-              (primitive_type))
+              (primitive))
             (field_identifier))
           (field
             (field_id
               (number))
             (field_type
               (identifier))
-            (field_identifier)))))  
+            (field_identifier)))))
