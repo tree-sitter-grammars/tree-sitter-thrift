@@ -23,6 +23,7 @@ checkout examples/armeria line/armeria 9e7d453d58f90fe7340b327a7cef684a4ea92afe
 checkout examples/pilota cloudwego/pilota 0ad25f1a9420cc68e4546c4cf7a0fb2f8158858c
 checkout examples/jaeger jaegertracing/jaeger-idl 05fe64e9c305526901f70ff692030b388787e388
 checkout examples/herringbone stripe-archive/herringbone 4f0524287ef47fc897702d654572bbeee1004879
+checkout examples/frugal Workiva/frugal fd26f827057ff45d08a7ffccecea64d9f3d4d4c1
 
 known_failures="$(cat script/known_failures.txt)"
 

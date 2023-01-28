@@ -683,7 +683,7 @@ module.exports = grammar({
         '"',
         repeat(choice(
           alias($.unescaped_double_string_fragment, $.string_fragment),
-          $.escape_sequence,
+          $._escape_sequence,
         )),
         '"',
       ),
@@ -691,7 +691,7 @@ module.exports = grammar({
         '\'',
         repeat(choice(
           alias($.unescaped_single_string_fragment, $.string_fragment),
-          $.escape_sequence,
+          $._escape_sequence,
         )),
         '\'',
       ),
@@ -706,17 +706,21 @@ module.exports = grammar({
     // same here
     unescaped_single_string_fragment: () => token.immediate(prec(1, /[^'\\]+/)),
 
+    _escape_sequence: ($) =>
+      choice(
+        prec(2, token.immediate(seq('\\', /[^abfnrtvxu'\"\\\?]/))),
+        prec(1, $.escape_sequence),
+      ),
+
     escape_sequence: () => token.immediate(seq(
       '\\',
       choice(
-        // /[^xu0-7]/,
-        /[abfnrtv'\"\\?]/,
+        /[^xu0-7]/,
         /[0-7]{1,3}/,
         /x[0-9a-fA-F]{2}/,
         /u[0-9a-fA-F]{4}/,
         /u{[0-9a-fA-F]+}/,
-      ),
-    )),
+      ))),
 
     identifier: () => /[A-Za-z_][A-Za-z0-9._]*/,
     _identifier_no_period: () => /[A-Za-z_][A-Za-z0-9_]*/,
