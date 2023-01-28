@@ -1,6 +1,7 @@
 {
   "name": "tree-sitter-thrift",
   "version": "0.2.0",
+  "description": "Thrift grammar for tree-sitter",
   "main": "bindings/node",
   "keywords": [
     "parser",
@@ -11,14 +12,8 @@
     "amaanq (Amaan Qureshi) <amaanq12@gmail.com>"
   ],
   "license": "MIT",
-  "description": "Thrift grammar for tree-sitter",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/duskmoon314/tree-sitter-thrift.git"
-  },
-  "scripts": {
-    "generate": "tree-sitter generate",
-    "test": "tree-sitter test"
+  "bugs": {
+    "url": "https://github.com/duskmoon314/tree-sitter-thrift/issues"
   },
   "dependencies": {
     "nan": "^2.16.0"
@@ -27,6 +22,13 @@
     "eslint": "^8.32.0",
     "eslint-config-google": "^0.14.0",
     "tree-sitter-cli": "0.20.7"
+  },
+  "repository": "https://github.com/duskmoon314/tree-sitter-thrift.git",
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp build",
+    "test": "tree-sitter test && script/parse-examples",
+    "parse": "tree-sitter parse",
+    "test-windows": "tree-sitter test"
   },
   "tree-sitter": [
     {
