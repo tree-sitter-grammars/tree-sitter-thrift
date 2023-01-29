@@ -1,7 +1,10 @@
 # tree-sitter-thrift
 
-[![Build Status](https://github.com/duskmoon314/tree-sitter-thrift/workflows/CI/badge.svg)](https://github.com/duskmoon314/tree-sitter-thrift/workflows/CI/badge.svg)
-[![Discord](https://img.shields.io/discord/1063097320771698699?logo=discord)](https://discord.gg/w7nTvsVJhm)
+<p align="center">
+<a href="https://discord.gg/w7nTvsVJhm">
+    <img src="https://img.shields.io/discord/1063097320771698699?logo=discord"
+        alt="Chat on Discord"></a>
+</p>
 
 Thrift grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter)
 
