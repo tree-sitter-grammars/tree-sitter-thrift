@@ -5,11 +5,12 @@
   "main": "bindings/node",
   "keywords": [
     "parser",
-    "lexer"
+    "lexer",
+    "thrift"
   ],
   "author": "duskmoon (Campbell He)",
   "contributors": [
-    "amaanq (Amaan Qureshi) <amaanq12@gmail.com>"
+    "Amaan Qureshi <amaanq12@gmail.com>"
   ],
   "license": "MIT",
   "bugs": {
@@ -23,7 +24,7 @@
     "eslint-config-google": "^0.14.0",
     "tree-sitter-cli": "0.20.7"
   },
-  "repository": "https://github.com/duskmoon314/tree-sitter-thrift.git",
+  "repository": "https://github.com/duskmoon314/tree-sitter-thrift",
   "scripts": {
     "build": "tree-sitter generate && node-gyp build",
     "test": "tree-sitter test && script/parse-examples",
@@ -35,6 +36,9 @@
       "scope": "source.thrift",
       "file-types": [
         "thrift"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
       ]
     }
   ]
