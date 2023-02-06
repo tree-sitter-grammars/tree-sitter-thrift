@@ -182,7 +182,6 @@
 [
   ";"
   ","
-  (list_separator)
 ] @punctuation.delimiter
 
 ; Errors
