@@ -1,10 +1,10 @@
 [package]
 name = "tree-sitter-thrift"
-description = "Thrift grammar for the tree-sitter parsing library"
-version = "0.3.0"
+description = "Thrift grammar for tree-sitter"
+version = "0.4.0"
 authors = [
 	"duskmoon (Campbell He) <kp.campbell.he@duskmoon314.com>",
-	"amaanq (Amaan Qureshi) <amaanq12@gmail.com>",
+	"Amaan Qureshi <amaanq12@gmail.com>",
 ]
 keywords = ["incremental", "parsing", "thrift"]
 categories = ["parsing", "text-editors"]

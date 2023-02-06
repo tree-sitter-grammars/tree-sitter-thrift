@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-thrift",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Thrift grammar for tree-sitter",
   "main": "bindings/node",
   "keywords": [
@@ -16,6 +16,7 @@
   "bugs": {
     "url": "https://github.com/duskmoon314/tree-sitter-thrift/issues"
   },
+  "homepage": "https://github.com/duskmoon314/tree-sitter-thrift#readme",
   "dependencies": {
     "nan": "^2.16.0"
   },
