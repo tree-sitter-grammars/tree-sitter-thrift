@@ -141,7 +141,7 @@
 
 (escape_sequence) @string.escape
 
-(uri) @string.special
+(uri (string_fragment) @text.uri) @string.special
 
 (number) @number
 
