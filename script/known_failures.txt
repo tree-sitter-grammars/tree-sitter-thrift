@@ -1,0 +1,4 @@
+examples/fbthrift/thrift/compiler/test/fixtures/py-reserved/src/test.thrift
+examples/fbthrift/thrift/test/py/PythonReservedKeywords.thrift
+examples/scrooge/scrooge-linter/src/test/thrift/fail/invalid.thrift
+examples/thrift/test/py/explicit_module/test3.thrift
