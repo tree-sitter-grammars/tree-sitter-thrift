@@ -18,55 +18,63 @@
  */
 
 
-========================================
-Test a typedef with a custom type
-========================================
+============================
+Test a recursive struct type
+============================
 
-typedef TypedefTestStruct MyStruct
-
----
-
-(document
-      (definition
-        (typedef
-          (definition_type
-            (custom_type
-              (identifier)))
-          (typedef_definition))))
-
-
-
-========================================
-Test a typedef with a trailing semicolon
-========================================
-
-typedef string MyString;
+struct RecList {
+  1: RecList & nextitem
+  3: i16 item
+}
 
 ---
 
 (document
-      (definition
-        (typedef
-          (definition_type
-            (primitive))
-          (typedef_definition)
-          (list_separator))))
+  (struct_definition
+    (identifier)
+    (field
+      (field_id
+        (number))
+      (type
+        (identifier))
+      (identifier))
+    (field
+      (field_id
+        (number))
+      (type
+        (primitive))
+      (identifier))))
 
 
 
 ====================================
-Test a typedef with a trailing comma
+Test a coupled recursive struct type
 ====================================
 
-typedef TypedefTestStruct MyStruct,
+struct CoRec {
+  1:  CoRec2 & other
+}
+
+struct CoRec2 {
+  1: CoRec other
+}
 
 ---
 
 (document
-      (definition
-        (typedef
-          (definition_type
-            (custom_type
-              (identifier)))
-          (typedef_definition)
-          (list_separator))))
+  (struct_definition
+    (identifier)
+    (field
+      (field_id
+        (number))
+      (type
+        (identifier))
+      (identifier)))
+  (struct_definition
+    (identifier)
+    (field
+      (field_id
+        (number))
+      (type
+        (identifier))
+      (identifier))))

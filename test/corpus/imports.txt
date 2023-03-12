@@ -31,23 +31,19 @@ typedef b.B B
 ---
 
 (document
-      (header
-        (include
-          (include_path
-            (string_fragment))))
-      (header
-        (include
-          (include_path
-            (string_fragment))))
-      (definition
-        (typedef
-          (definition_type
-            (custom_type
-              (identifier)))
-          (typedef_definition)))
-      (definition
-        (typedef
-          (definition_type
-            (custom_type
-              (identifier)))
-          (typedef_definition))))
+  (include_statement
+    (string
+      (string_fragment)))
+  (include_statement
+    (string
+      (string_fragment)))
+  (typedef_definition
+    (definition_type
+      (identifier)
+      (identifier))
+    (typedef_identifier))
+  (typedef_definition
+    (definition_type
+      (identifier)
+      (identifier))
+    (typedef_identifier)))

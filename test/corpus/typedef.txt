@@ -18,41 +18,48 @@
  */
 
 
-===========================
-Test a namespace with a uri
-===========================
+========================================
+Test a typedef with a custom type
+========================================
 
-namespace xsd test (uri = 'http://thrift.apache.org/ns/ThriftTest')
-
----
-
-(document
-      (header
-        (namespace
-          (namespace_scope)
-          (namespace_definition)
-          (namespace_uri
-            (uri_def)
-            (uri
-              (string_fragment))))))
-
-
-
-========================
-Test a noexist namespace
-========================
-
-namespace noexist ThriftTest
-namespace cpp.noexist ThriftTest
+typedef TypedefTestStruct MyStruct
 
 ---
 
 (document
-      (header
-        (namespace
-          (namespace_scope)
-          (namespace_definition)))
-      (header
-        (namespace
-          (namespace_scope)
-          (namespace_definition))))
+  (typedef_definition
+    (definition_type
+      (identifier))
+    (typedef_identifier)))
+
+
+
+========================================
+Test a typedef with a trailing semicolon
+========================================
+
+typedef string MyString;
+
+---
+
+(document
+  (typedef_definition
+    (definition_type
+      (primitive))
+    (typedef_identifier)))
+
+
+
+====================================
+Test a typedef with a trailing comma
+====================================
+
+typedef TypedefTestStruct MyStruct,
+
+---
+
+(document
+  (typedef_definition
+    (definition_type
+      (identifier))
+    (typedef_identifier)))
