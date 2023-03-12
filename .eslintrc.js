@@ -1,16 +1,16 @@
 module.exports = {
-  'env': {
-    'commonjs': true,
-    'es2021': true,
+  env: {
+    commonjs: true,
+    es2021: true,
   },
-  'extends': 'google',
-  'overrides': [
+  extends: 'google',
+  overrides: [
   ],
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'sourceType': 'module',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  'rules': {
+  rules: {
     'indent': ['error', 2, {'SwitchCase': 1}],
     'max-len': [
       'error',
