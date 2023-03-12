@@ -1,16 +1,18 @@
 [package]
 name = "tree-sitter-thrift"
 description = "Thrift grammar for tree-sitter"
-version = "0.4.0"
+version = "0.5.0"
 authors = [
-	"duskmoon (Campbell He) <kp.campbell.he@duskmoon314.com>",
 	"Amaan Qureshi <amaanq12@gmail.com>",
+	"duskmoon (Campbell He) <kp.campbell.he@duskmoon314.com>",
 ]
+license = "MIT"
+readme = "bindings/rust/README.md"
 keywords = ["incremental", "parsing", "thrift"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/duskmoon314/tree-sitter-thrift"
 edition = "2021"
-license = "MIT"
+autoexamples = false
 
 build = "bindings/rust/build.rs"
 include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
@@ -19,7 +21,7 @@ include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "~0.20"
+tree-sitter = "~0.20.9"
 
 [build-dependencies]
 cc = "~1.0"
