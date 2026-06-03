@@ -1,0 +1,446 @@
+// Apache Thrift grammar for tree-sitter (native DSL).
+// Translated from grammar.js.
+
+macro list_seq(rule: rule_t, separator: rule_t) rule_t {
+    seq(rule, repeat(seq(separator, rule)))
+}
+macro list_seq_trailing(rule: rule_t, separator: rule_t) rule_t {
+    seq(rule, repeat(seq(separator, rule)), optional(separator))
+}
+
+// `seq(_type_identifier, optional(annotation_definition), ...)` wraps used for
+// containers - extract a 1-arg "type with optional annotation" helper.
+macro type_with_anno() rule_t { seq(type, optional(annotation_definition)) }
+
+grammar {
+    language: "thrift",
+    word: identifier,
+    extras: [comment, regexp(r"\s")],
+    inline: [_type_identifier, list_separator],
+    supertypes: [definition, header],
+}
+
+rule document { seq(repeat(header), repeat(definition)) }
+
+rule header { choice(include_statement, namespace_declaration, package_declaration) }
+
+rule include_statement { seq(choice("include", "cpp_include"), string) }
+
+rule namespace_declaration {
+    seq(
+        "namespace",
+        namespace_scope,
+        choice(alias(_type_identifier, namespace), string),
+        optional(namespace_uri),
+        optional(";"),
+    )
+}
+
+rule package_declaration {
+    seq(repeat(fb_annotation_definition), "package", string)
+}
+
+rule namespace_scope {
+    choice(
+        "*",
+        // namespace_languages
+        "as3", "c_glib", "cl", "cocoa", "cpp", "cpp2", "cpp.noexist",
+        "csharp", "d", "dart", "delphi", "erl", "go", "haxe",
+        "java", "javame", "js", "kotlin", "lua",
+        "netcore", "netstd", "nodejs", "nodets", "noexist",
+        "ocaml", "perl", "php", "php.path",
+        "py", "py.twisted", "rb", "rs",
+        "smalltalk.prefix", "smalltalk.category", "st", "swift",
+        "ts", "xml", "xsd",
+        // Deprecated legacy
+        "cocoa_prefix", "cpp_namespace", "csharp_namespace", "delphi_namespace",
+        "java_package", "perl_package", "php_namespace", "py_module",
+        "ruby_namespace", "smalltalk_category", "smalltalk_prefix", "xsd_namespace",
+        // Facebook/Twitter extensions
+        "android", "hack", "hack.module", "hs", "hs2",
+        "java.swift", "java.swift.constants", "json",
+        "py.asyncio", "py3", "rust", "scala",
+    )
+}
+
+rule namespace_uri { seq("(", "uri", "=", string, ")") }
+
+rule definition {
+    choice(
+        const_definition, typedef_definition, enum_definition,
+        senum_definition, struct_definition, union_definition,
+        exception_definition, service_definition, interaction_definition,
+    )
+}
+
+rule const_definition {
+    seq(
+        repeat(fb_annotation_definition),
+        "const", type, identifier, "=", literal,
+        optional(annotation_definition),
+        optional(list_separator),
+    )
+}
+
+rule typedef_definition {
+    seq(
+        repeat(fb_annotation_definition),
+        "typedef",
+        definition_type,
+        optional(annotation_definition),
+        alias(identifier, typedef_identifier),
+        optional(annotation_definition),
+        optional(list_separator),
+    )
+}
+
+rule enum_definition {
+    seq(
+        repeat(fb_annotation_definition),
+        "enum",
+        _type_identifier,
+        "{",
+        repeat(seq(
+            repeat(fb_annotation_definition),
+            _identifier_with_dots,
+            optional(seq("=", number)),
+            optional(annotation_definition),
+            optional(list_separator),
+        )),
+        "}",
+        optional(annotation_definition),
+    )
+}
+
+rule senum_definition {
+    seq(
+        "senum", _type_identifier,
+        "{", repeat(seq(string, optional(list_separator))), "}",
+    )
+}
+
+rule struct_definition {
+    seq(
+        repeat(fb_annotation_definition),
+        "struct", _type_identifier,
+        optional("xsd_all"),
+        "{", repeat(field), "}",
+        optional(annotation_definition),
+    )
+}
+
+rule union_definition {
+    seq(
+        repeat(fb_annotation_definition),
+        "union", _type_identifier,
+        optional("xsd_all"),
+        "{", repeat(field), "}",
+        optional(annotation_definition),
+    )
+}
+
+rule exception_definition {
+    seq(
+        repeat(fb_annotation_definition),
+        repeat(exception_modifier),
+        "exception", identifier,
+        "{", repeat(field), "}",
+        optional(annotation_definition),
+    )
+}
+
+rule exception_modifier {
+    choice("client", "permanent", "server", "safe", "stateful", "transient")
+}
+
+rule service_definition {
+    seq(
+        repeat(fb_annotation_definition),
+        "service", _type_identifier,
+        optional(seq("extends", _type_identifier)),
+        "{",
+        repeat(choice(seq("performs", _type_identifier, ";"), function_definition)),
+        "}",
+        optional(annotation_definition),
+    )
+}
+
+rule interaction_definition {
+    seq(
+        "interaction", _type_identifier,
+        "{", repeat(function_definition), "}",
+        optional(annotation_definition),
+    )
+}
+
+rule field {
+    seq(
+        repeat(fb_annotation_definition),
+        optional(field_id),
+        optional(field_modifier),
+        type,
+        optional("&"),
+        optional(annotation_definition),
+        _identifier_with_dots,
+        optional(seq("=", literal)),
+        optional("xsd_optional"),
+        optional("xsd_nillable"),
+        optional(xsd_attrs),
+        optional(annotation_definition),
+        optional(list_separator),
+    )
+}
+
+rule field_id { seq(number, ":") }
+rule field_modifier { choice("required", "optional") }
+
+rule xsd_attrs { seq("xsd_attrs", "{", repeat(field), "}") }
+
+rule function_definition {
+    seq(
+        repeat(fb_annotation_definition),
+        optional(function_modifier),
+        list_seq(type, ","),
+        optional(annotation_definition),
+        identifier,
+        parameters,
+        optional(throws),
+        optional(annotation_definition),
+        optional(list_separator),
+    )
+}
+
+rule function_modifier { choice("async", "oneway", "readonly", "idempotent") }
+
+rule parameters { seq("(", repeat(parameter), ")") }
+
+rule parameter {
+    seq(
+        repeat(fb_annotation_definition),
+        optional(field_id),
+        optional(field_modifier),
+        type,
+        optional(annotation_definition),
+        identifier,
+        optional(seq("=", literal)),
+        optional("xsd_optional"),
+        optional("xsd_nillable"),
+        optional(xsd_attrs),
+        optional(annotation_definition),
+        optional(list_separator),
+    )
+}
+
+rule throws { seq("throws", parameters) }
+
+rule type { choice(_type_identifier, primitive, container_type, "void") }
+
+rule definition_type { choice(primitive, container_type, _type_identifier) }
+
+rule primitive {
+    choice("binary", "bool", "byte", "i8", "i16", "i32", "i64",
+        "float", "double", "string", "slist")
+}
+
+rule container_type { choice(list, map, set, sink, stream) }
+
+rule list {
+    prec_right(0, seq(
+        "list",
+        "<",
+        type_with_anno(),
+        ">",
+        optional(annotation_definition),
+        optional(string),
+    ))
+}
+
+rule map {
+    prec_right(0, seq(
+        "map",
+        optional(string),
+        "<",
+        type_with_anno(),
+        ",",
+        type_with_anno(),
+        ">",
+        optional(annotation_definition),
+    ))
+}
+
+rule set {
+    prec_right(0, seq(
+        "set",
+        optional(string),
+        "<",
+        type_with_anno(),
+        ">",
+        optional(annotation_definition),
+    ))
+}
+
+rule sink {
+    prec_right(0, seq(
+        "sink",
+        "<",
+        type, optional(annotation_definition), optional(throws),
+        ",",
+        type, optional(annotation_definition), optional(throws),
+        ">",
+    ))
+}
+
+rule stream {
+    prec_right(0, seq(
+        "stream",
+        "<", type, optional(throws), ">",
+    ))
+}
+
+rule annotation_definition {
+    seq(
+        "(",
+        optional(list_seq_trailing(
+            seq(annotation_identifier, optional(seq("=", literal))),
+            ",",
+        )),
+        ")",
+    )
+}
+
+rule fb_annotation_definition {
+    seq(
+        "@",
+        annotation_identifier,
+        optional(seq(
+            "{",
+            repeat(seq(identifier, "=", literal, optional(","))),
+            "}",
+        )),
+    )
+}
+
+rule literal {
+    prec_right(0, choice(
+        number, double, boolean, string,
+        list_literal, map_literal, struct_literal, _type_identifier,
+    ))
+}
+
+rule number {
+    token(choice(
+        // hex
+        seq(optional(choice("-", "+")), regexp(r"0[xX]"), regexp(r"[\da-fA-F](_?[\da-fA-F])*")),
+        // binary
+        seq(optional(choice("-", "+")), regexp(r"0[bB]"), regexp(r"[01](_?[01])*")),
+        // decimal
+        choice(
+            seq(
+                optional(choice("-", "+")),
+                choice(
+                    "0",
+                    seq(optional("0"), regexp(r"[1-9]"), optional(seq(optional("_"), regexp(r"\d(_?\d)*")))),
+                ),
+            ),
+            regexp(r"\d(_?\d)*"),
+            seq(optional(choice("-", "+")), regexp(r"\d(_?\d)*")),
+        ),
+    ))
+}
+
+rule double { regexp(r"[+-]?(\d+(\.\d+)?|\.\d+)([Ee][+-]?\d+)?") }
+
+rule boolean { choice("true", "false") }
+
+rule list_literal {
+    seq("[", repeat(seq(literal, optional(list_separator))), "]")
+}
+
+rule map_literal {
+    seq(
+        "{",
+        repeat(seq(literal, ":", literal, optional(list_separator))),
+        "}",
+    )
+}
+
+rule struct_literal {
+    seq(
+        _type_identifier,
+        "{",
+        repeat(seq(identifier, "=", literal, optional(","))),
+        "}",
+    )
+}
+
+rule string {
+    choice(
+        seq(
+            "\"",
+            repeat(choice(
+                alias(unescaped_double_string_fragment, string_fragment),
+                _escape_sequence,
+            )),
+            "\"",
+        ),
+        seq(
+            "'",
+            repeat(choice(
+                alias(unescaped_single_string_fragment, string_fragment),
+                _escape_sequence,
+            )),
+            "'",
+        ),
+    )
+}
+
+rule unescaped_double_string_fragment {
+    token_immediate(prec(1, regexp(r#"[^"\\]+"#)))
+}
+
+rule unescaped_single_string_fragment {
+    token_immediate(prec(1, regexp(r"[^'\\]+")))
+}
+
+rule _escape_sequence {
+    choice(
+        prec(2, token_immediate(seq("\\", regexp(r#"[^abfnrtvxu'"\\\?]"#)))),
+        prec(1, escape_sequence),
+    )
+}
+
+rule escape_sequence {
+    token_immediate(seq(
+        "\\",
+        choice(
+            regexp(r"[^xu0-7]"),
+            regexp(r"[0-7]{1,3}"),
+            regexp(r"x[0-9a-fA-F]{2}"),
+            regexp(r"u[0-9a-fA-F]{4}"),
+            regexp(r"u\{[0-9a-fA-F]+\}"),
+            regexp(r"U[0-9a-fA-F]{8}"),
+        ),
+    ))
+}
+
+rule identifier { regexp(r"[A-Za-z_][A-Za-z0-9_]*") }
+
+rule _identifier_with_dots {
+    alias(regexp(r"[A-Za-z_][A-Za-z0-9_.]*"), identifier)
+}
+
+rule _type_identifier {
+    seq(field(type, identifier), repeat(seq(".", identifier)))
+}
+
+rule annotation_identifier { _type_identifier }
+
+rule list_separator { choice(",", ";") }
+
+rule comment {
+    token(choice(
+        seq("#", regexp(r"(\\(.|\r?\n)|[^\\\n])*")),
+        seq("//", regexp(r"(\\(.|\r?\n)|[^\\\n])*")),
+        seq("/*", regexp(r"[^*]*\*+([^/*][^*]*\*+)*"), "/"),
+    ))
+}
